@@ -1,0 +1,6 @@
+<navigation>
+  <page key="cron" file="cron.php" access="admin" />
+  <page key="user_cron" file="user_cron.php" access="user,admin" />
+  <page key="thetime" file="thetime.php" access="user,admin" />
+  <page key="events" file="events.php" access="admin" />
+</navigation>
