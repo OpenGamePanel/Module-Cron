@@ -21,16 +21,12 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  */
-#####################################################################
-# English language variables
-#
-#####################################################################
 
-define('minute', "Min");
+define('minute', "Minute");
 define('hour', "Hour");
 define('day', "Day");
 define('month', "Month");
-define('day_of_the_week', "D/Wk");
+define('day_of_the_week', "D/Week");
 define('action', "Action");
 define('stop', "Stop");
 define('start', "Start");
