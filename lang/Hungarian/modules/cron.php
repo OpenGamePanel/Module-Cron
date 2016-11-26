@@ -22,22 +22,22 @@
  *
  */
 
-define('minute', "Min");
-define('hour', "Hour");
-define('day', "Day");
-define('month', "Month");
-define('day_of_the_week', "D/Wk");
-define('action', "Action");
-define('stop', "Stop");
-define('start', "Start");
-define('restart', "Restart");
-define('command', "Command");
-define('add', "Add");
-define('remove', "Remove");
-define('now', "Now");
-define('schedule_new_job', "Schedule a new job");
-define('scheduled_jobs', "Scheduled jobs");
-define('there_are_no_scheduled_jobs', "There are no scheduled jobs");
-define('cron_events', "Cron Events");
-define('refresh_interval', "Refresh Interval");
+define('minute', "Perc");
+define('hour', "Óra");
+define('day', "Nap");
+define('month', "Hónap");
+define('day_of_the_week', "N/Hét");
+define('action', "Művelet");
+define('stop', "Leállítás");
+define('start', "Elindítás");
+define('restart', "Újraindítás");
+define('command', "Parancs");
+define('add', "Hozzáadás");
+define('remove', "Eltávolítás");
+define('now', "Most");
+define('schedule_new_job', "Új feladat ütemezése");
+define('scheduled_jobs', "Ütemezett feladatok");
+define('there_are_no_scheduled_jobs', "Nincsenek ütemezett feladatok");
+define('cron_events', "Cron események");
+define('refresh_interval', "Frissítési intervallum");
 ?>

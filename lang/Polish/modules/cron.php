@@ -2,7 +2,7 @@
 /*
  *
  * OGP - Open Game Panel
- * Copyright (C) Copyright (C) 2008 - 2012 The OGP Development Team
+ * Copyright (C) 2008 - 2016 The OGP Development Team
  *
  * http://www.opengamepanel.org/
  *
@@ -21,11 +21,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  */
-	
-define('minute', "Min");
+
+define('minute', "Minute");
 define('hour', "Godz");
 define('day', "Dni");
-define('month', "Miesiące");
+define('month', "Miesiąc");
 define('day_of_the_week', "D/Week");
 define('action', "Akcja");
 define('stop', "Stop");
@@ -33,7 +33,7 @@ define('start', "Start");
 define('restart', "Restart");
 define('command', "Komenda");
 define('add', "Dodaj");
-define('remove', "Usuń");
+define('remove', "Usunąć");
 define('now', "Teraz");
 define('schedule_new_job', "Zaplanować nowe zadanie");
 define('scheduled_jobs', "Zaplanowane zadania");

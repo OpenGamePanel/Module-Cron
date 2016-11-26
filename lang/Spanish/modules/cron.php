@@ -2,7 +2,7 @@
 /*
  *
  * OGP - Open Game Panel
- * Copyright (C) Copyright (C) 2008 - 2012 The OGP Development Team
+ * Copyright (C) 2008 - 2016 The OGP Development Team
  *
  * http://www.opengamepanel.org/
  *
@@ -22,8 +22,7 @@
  *
  */
 
-	
-define('minute', "Min");
+define('minute', "Minuto");
 define('hour', "Hora");
 define('day', "Dia");
 define('month', "Mes");
