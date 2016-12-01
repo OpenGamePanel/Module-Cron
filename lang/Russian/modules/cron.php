@@ -2,7 +2,7 @@
 /*
  *
  * OGP - Open Game Panel
- * Copyright (C) Copyright (C) 2008 - 2012 The OGP Development Team
+ * Copyright (C) 2008 - 2016 The OGP Development Team
  *
  * http://www.opengamepanel.org/
  *
@@ -22,16 +22,16 @@
  *
  */
 
-define('minute', "Min");
+define('minute', "Minute");
 define('hour', "Hour");
 define('day', "Day");
 define('month', "Month");
-define('day_of_the_week', "D/Wk");
+define('day_of_the_week', "D/Week");
 define('action', "Action");
 define('stop', "Stop");
-define('start', "Start");
+define('start', "Запуск");
 define('restart', "Restart");
-define('command', "Command");
+define('command', "RCON&nbsp;команда");
 define('add', "Add");
 define('remove', "Remove");
 define('now', "Now");
@@ -39,5 +39,5 @@ define('schedule_new_job', "Schedule a new job");
 define('scheduled_jobs', "Scheduled jobs");
 define('there_are_no_scheduled_jobs', "There are no scheduled jobs");
 define('cron_events', "Cron Events");
-define('refresh_interval', "Refresh Interval");
+define('refresh_interval', "Интервал обновления консоли");
 ?>

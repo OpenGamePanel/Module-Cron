@@ -2,7 +2,7 @@
 /*
  *
  * OGP - Open Game Panel
- * Copyright (C) Copyright (C) 2008 - 2012 The OGP Development Team
+ * Copyright (C) 2008 - 2016 The OGP Development Team
  *
  * http://www.opengamepanel.org/
  *
@@ -22,8 +22,7 @@
  *
  */
 
-	
-define('minute', "Min");
+define('minute', "Minute");
 define('hour', "Heure");
 define('day', "Jour");
 define('month', "Mois");
@@ -37,8 +36,8 @@ define('add', "Ajouter");
 define('remove', "Effacer");
 define('now', "Maintenant");
 define('schedule_new_job', "Planifier une action");
-define('scheduled_jobs', "Actions planifiées");
-define('there_are_no_scheduled_jobs', "Pas d'actions planifiées");
-define('cron_events', "Événements Planifiés");
-define('refresh_interval', "Interval d'actualisation");
+define('scheduled_jobs', "Actions planifiÃ©es");
+define('there_are_no_scheduled_jobs', "Pas d'actions planifiÃ©es");
+define('cron_events', "Logs des Ã‰vÃ©nements PlanifiÃ©s");
+define('refresh_interval', "Intervalle d'actualisation");
 ?>

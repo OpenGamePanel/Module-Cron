@@ -1,8 +1,8 @@
-<?php 
+<?php
 /*
  *
  * OGP - Open Game Panel
- * Copyright (C) Copyright (C) 2008 - 2014 The OGP Development Team
+ * Copyright (C) 2008 - 2016 The OGP Development Team
  *
  * http://www.opengamepanel.org/
  *
@@ -21,22 +21,23 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  */
-define('minute', 'Minute');
-define('hour', 'Hour');
-define('day', 'Day');
-define('month', 'Month');
-define('day_of_the_week', 'D/wk');
-define('action', 'Action');
-define('stop', 'Stop');
-define('start', 'Start');
-define('restart', 'Restart');
-define('command', 'Command');
-define('add', 'Add');
-define('remove', 'Remove');
-define('now', 'Now');
-define('schedule_new_job', 'Schedule new job');
-define('scheduled_jobs', 'Scheduled jobs');
-define('there_are_no_scheduled_jobs', 'There are no scheduled jobs');
-define('cron_events', 'Cron events');
-define('refresh_interval', 'Refresh interval');
+
+define('minute', "Minute");
+define('hour', "Hour");
+define('day', "Day");
+define('month', "Month");
+define('day_of_the_week', "D/Week");
+define('action', "Action");
+define('stop', "Stop");
+define('start', "Start");
+define('restart', "Restart");
+define('command', "Command");
+define('add', "Add");
+define('remove', "Remove");
+define('now', "Now");
+define('schedule_new_job', "Schedule a new job");
+define('scheduled_jobs', "Scheduled jobs");
+define('there_are_no_scheduled_jobs', "There are no scheduled jobs");
+define('cron_events', "Cron Events");
+define('refresh_interval', "Log genopfrisker interval");
 ?>
