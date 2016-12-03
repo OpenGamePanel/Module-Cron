@@ -117,7 +117,7 @@ function get_action_selector($action = false) {
 
 function get_server_selector($server_homes, $homeid_ip_port = FALSE, $onchange = FALSE) {
 	$onchange_this_form_submit = $onchange ? 'onchange="this.form.submit();"' : '';
-	$select_game = "<select style='width: 492px;' name='homeid_ip_port' $onchange_this_form_submit>\n";
+	$select_game = "<select style='text-overflow: ellipsis; width: 100%;' name='homeid_ip_port' $onchange_this_form_submit>\n";
 	if($server_homes != FALSE)
 	{
 		foreach ( $server_homes as $server_home )
@@ -464,7 +464,7 @@ function exec_ogp_module()
 									<td style="width: 100px;" >
 										'.$task.'
 									</td>
-									<td>
+									<td style="width: 132px;">
 										<input type="hidden" name="job_id" value=\''.$jobId.'\' />
 										<input type="hidden" name="r_server_id" value=\''.$remote_server_id.'\' />
 										<input style="width:60px;" type="submit" name="editJob" value="'. edit .'" />
