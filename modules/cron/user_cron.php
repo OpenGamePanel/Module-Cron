@@ -242,10 +242,10 @@ function exec_ogp_module()
 	$homeid_ip_port = isset($_POST['homeid_ip_port']) ? $_POST['homeid_ip_port'] : key($server_homes);
 	$r_server_id = $server_homes[$homeid_ip_port]['remote_server_id'];
 	$curtime = $refresh->add( "home.php?m=cron&p=thetime&r_server_id=$r_server_id&type=cleared" );
-	echo "<pre class='log' ><form action='' method='POST' ><label for='r_server' >" . now . 
-		 "&nbsp;</label>" . get_server_selector($server_homes, $homeid_ip_port, TRUE) .
-		 "</form> <b style='font-size:1.4em;'>" . $refresh->getdiv($curtime) . "</b></pre>";
-?>
+	echo "<pre class='log' ><table><tr><td>" . now . 
+		"&nbsp;</td><td><form action='' method='POST' >" . get_server_selector($server_homes, $homeid_ip_port, TRUE) . 
+		"</form></td></tr></table> <b style='font-size:1.4em;'>" . $refresh->getdiv($curtime) . "</b></pre>";
+ ?>
 <form method="POST" >	
 <table class="center">
 	<tr>
