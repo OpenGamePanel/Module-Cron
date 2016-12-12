@@ -23,11 +23,11 @@
  */
 
 define('minute', "Minute");
-define('hour', "Hour");
-define('day', "Day");
-define('month', "Month");
-define('day_of_the_week', "D/Week");
-define('action', "Action");
+define('hour', "Stunde");
+define('day', "Tag");
+define('month', "Monat");
+define('day_of_the_week', "Tag/Woche");
+define('action', "Aktion");
 define('stop', "Stop");
 define('start', "Start");
 define('restart', "Restart");
