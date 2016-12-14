@@ -359,7 +359,7 @@ function exec_ogp_module()
 											'.get_action_selector($job['action'])."</td><td>".
 											  get_server_selector($server_homes, $job['home_id']."_".$job['ip']."_".$job['port']).'
 										</td>
-										<td>
+										<td style="width: 132px;">
 											<input type="hidden" name="job_id" value=\''.$jobId.'\' />
 											<input type="hidden" name="r_server_id" value=\''.$remote_server_id.'\' />
 											<input style="width:60px;" type="submit" name="editJob" value="'. edit .'" />
