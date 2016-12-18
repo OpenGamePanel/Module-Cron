@@ -23,18 +23,18 @@
  */
 
 define('minute', "Minute");
-define('hour', "Hour");
-define('day', "Day");
-define('month', "Month");
-define('day_of_the_week', "D/Week");
-define('action', "Action");
+define('hour', "Stunde");
+define('day', "Tag");
+define('month', "Monat");
+define('day_of_the_week', "Tag/Woche");
+define('action', "Aktion");
 define('stop', "Stop");
 define('start', "Start");
-define('restart', "Restart");
+define('restart', "Neustart");
 define('command', "Befehl");
-define('add', "Add");
-define('remove', "Remove");
-define('now', "Now");
+define('add', "Hinzufügen");
+define('remove', "Entfernen");
+define('now', "Jetzt");
 define('schedule_new_job', "Schedule a new job");
 define('scheduled_jobs', "Scheduled jobs");
 define('there_are_no_scheduled_jobs', "There are no scheduled jobs");
