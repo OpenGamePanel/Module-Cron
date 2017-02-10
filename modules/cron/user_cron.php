@@ -193,7 +193,7 @@ function exec_ogp_module()
 															  "mod_name" => $game_home['mod_name'],
 															  "def_precmd" => $game_home['def_precmd'],
 															  "def_postcmd" => $game_home['def_postcmd']);
-			$startup_cmd = get_start_cmd($remote,$server_xml,$game_home,$game_home['mod_id'],$game_home['ip'],$game_home['port']);
+			$startup_cmd = get_start_cmd($remote,$server_xml,$game_home,$game_home['mod_id'],$game_home['ip'],$game_home['port'], $remote->what_os());
 			$cpu = $game_home['cpu_affinity'];
 			$nice = $game_home['nice'];
 			
