@@ -35,9 +35,9 @@ define('command', "Befehl");
 define('add', "Hinzufügen");
 define('remove', "Entfernen");
 define('now', "Jetzt");
-define('schedule_new_job', "Schedule a new job");
-define('scheduled_jobs', "Scheduled jobs");
-define('there_are_no_scheduled_jobs', "There are no scheduled jobs");
-define('cron_events', "Cron Events");
-define('refresh_interval', "Refresh Interval");
+define('schedule_new_job', "Neue Aufgabe planen");
+define('scheduled_jobs', "Geplante Aufgaben");
+define('there_are_no_scheduled_jobs', "Es gibt keine geplanten Aufgaben");
+define('cron_events', "Cron Ereignisse");
+define('refresh_interval', "Aktualisierungsinterval");
 ?>
