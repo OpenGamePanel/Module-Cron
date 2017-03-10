@@ -3,7 +3,7 @@ $(document).ready(function(){
 		checkSteamSupportAutoUpdate($(this));
 	});
 	
-	$("select[name='homeid_ip_port']").trigger("change");
+	checkSteamSupportAutoUpdate($("select[name='homeid_ip_port']").first());
 });
 
 function checkSteamSupportAutoUpdate(elem){
