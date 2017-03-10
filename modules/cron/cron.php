@@ -120,11 +120,19 @@ function get_server_selector($server_homes, $homeid_ip_port = FALSE, $onchange =
 	$select_game = "<select style='text-overflow: ellipsis; width: 100%;' name='homeid_ip_port' $onchange_this_form_submit>\n";
 	if($server_homes != FALSE)
 	{
+		
 		foreach ( $server_homes as $server_home )
 		{
+			// Find out if it's a steamcmd server
+			$additionalMarkup = "";
+			$server_xml = read_server_config(SERVER_CONFIG_LOCATION."/".$server_home['home_cfg_file']);
+			if( $server_xml->installer == "steamcmd" ){
+				$additionalMarkup = 'steam="1"';
+			}			
+			
 			$selected = ($homeid_ip_port and $homeid_ip_port == $server_home['home_id']."_".$server_home['ip']."_".$server_home['port']) ? 'selected="selected"' : '';
 			$select_game .= "<option value='". $server_home['home_id'] . "_" . $server_home['ip'] .
-							"_" . $server_home['port'] . "' $selected>" . $server_home['home_name'] . 
+							"_" . $server_home['port'] . "' $selected " . $additionalMarkup . ">" . $server_home['home_name'] . 
 							" - " . $server_home['ip'] . ":" .$server_home['port'] . " ( " . $server_home['remote_server_name'] . " )</option>\n";
 		}
 	}

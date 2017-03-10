@@ -86,6 +86,23 @@ function reloadJobs($server_homes, $remote_servers)
 															   'home_id' => $home_id,
 															   'ip' => $ip,
 															   'port' => $port);
+					}else if(stripos($command, "homeid=")){
+						$homeId = substr($command, stripos($command, "homeid=") + 7);
+						if(stripos($homeId, "&")){
+							$homeId = substr($homeId, 0, stripos($homeId, "&"));
+						}else{
+							$homeId = substr($homeId, 0);
+						}
+						
+						$jobsArray[$rhost_id][$jobId] = array( 'job' => $job, 
+															   'minute' => $minute, 
+															   'hour' => $hour, 
+															   'dayOfTheMonth' => $dayOfTheMonth, 
+															   'month' => $month, 
+															   'dayOfTheWeek' => $dayOfTheWeek,
+															   'command' => $command,
+															   'action' => 'steam_auto_update',
+															   'home_id' => $homeId);
 					}
 				}
 			}
@@ -119,7 +136,7 @@ function get_server_selector($server_homes, $homeid_ip_port = FALSE, $onchange =
 				$additionalMarkup = 'steam="1"';
 			}			
 			
-			$selected = ($homeid_ip_port and $homeid_ip_port == $server_home['home_id']."_".$server_home['ip']."_".$server_home['port']) ? 'selected="selected"' : '';
+			$selected = (trim($homeid_ip_port) == trim($server_home['home_id']) || ($homeid_ip_port and $homeid_ip_port == $server_home['home_id']."_".$server_home['ip']."_".$server_home['port'])) ? 'selected="selected"' : '';
 			$select_game .= "<option value='". $server_home['home_id'] . "_" . $server_home['ip'] .
 							"_" . $server_home['port'] . "' $selected " . $additionalMarkup . ">" . $server_home['home_name'] . 
 							" - " . $server_home['ip'] . ":" .$server_home['port'] . "</option>\n";
@@ -354,7 +371,14 @@ function exec_ogp_module()
 			{				
 				if(isset($job['action']))
 				{
-					$user_jobs .=  '<tr>
+					if(hasValue($job['home_id']) && hasValue(@$job['ip']) && hasValue(@$job['port'])){
+						$uniqueStr = $job['home_id']."_".$job['ip']."_".$job['port'];
+					}else if(hasValue($job['home_id'])){
+						$uniqueStr = $job['home_id'];
+					}
+					
+					if(hasValue(@$uniqueStr)){
+						$user_jobs .=  '<tr>
 										<td style="width: 35px;" >
 											<form method="POST" >
 											<input style="width: 30px;" type="text" name="minute" value="'.$job['minute'].'" />
@@ -373,7 +397,7 @@ function exec_ogp_module()
 										</td>
 										<td>
 											'.get_action_selector($job['action'])."</td><td>".
-											  get_server_selector($server_homes, $job['home_id']."_".$job['ip']."_".$job['port']).'
+											  get_server_selector($server_homes, $uniqueStr).'
 										</td>
 										<td style="width: 132px;">
 											<input type="hidden" name="job_id" value=\''.$jobId.'\' />
@@ -383,6 +407,7 @@ function exec_ogp_module()
 											</form>
 										</td>
 									</tr>';
+					}
 				}
 			}
 		}
