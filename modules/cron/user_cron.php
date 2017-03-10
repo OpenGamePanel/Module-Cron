@@ -96,7 +96,7 @@ function reloadJobs($server_homes, $remote_servers)
 
 function get_action_selector($action = false) {
 	$server_actions = array('restart','stop','start','steam_auto_update');
-	$select_action = '<select  style="width: 100px;" name="action">';
+	$select_action = '<select name="action">';
 	foreach($server_actions as $server_action)
 	{
 		$selected = ($action and $action == $server_action) ? 'selected="selected"' : '';
