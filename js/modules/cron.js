@@ -7,10 +7,10 @@ $(document).ready(function(){
 });
 
 function checkSteamSupportAutoUpdate(elem){
-	var curOpt = $("select[name='homeid_ip_port'] option:selected");
+	var curOpt = $("option:selected", $(elem));
 	if(curOpt.attr('steam')){
-		$("option[value='steam_auto_update']", $(elem)).removeAttr('disabled');
+		$("option[value='steam_auto_update']", $("select[name='action']")).removeAttr('disabled');
 	}else{
-		$("option[value='steam_auto_update']", $(elem)).attr('disabled','disabled');
+		$("option[value='steam_auto_update']", $("select[name='action']")).attr('disabled','disabled');
 	}
 }
