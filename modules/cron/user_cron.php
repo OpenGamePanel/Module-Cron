@@ -1,4 +1,4 @@
-<script type="text/javascript" src="js/jquery/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="js/modules/cron.js"></script>
 <?php
 /*
  *
@@ -54,7 +54,7 @@ function reloadJobs($server_homes, $remote_servers)
 					$dayOfTheWeek = $parts[4];
 					unset($parts[0],$parts[1],$parts[2],$parts[3],$parts[4]);
 					$command = implode(" ", $parts);
-					$retval = preg_match_all("/^%ACTION=(start|restart|stop|steam_auto_update)\|%\|(.*)$/", $command, $job_info );
+					$retval = preg_match_all("/^%ACTION=(start|restart|stop)\|%\|(.*)$/", $command, $job_info );
 					if($retval and !empty($job_info[1][0]))
 					{
 						//print_r($job_info);
@@ -73,9 +73,6 @@ function reloadJobs($server_homes, $remote_servers)
 							case 'stop':
 								list($home_id, $ip, $port, $control_protocol, 
 									 $control_password, $control_type, $home_path) = $server_args;
-								break;
-							case 'steam_auto_update':
-								// TODO Something
 								break;
 						}
 						if(!isset($server_homes[$home_id."_".$ip."_".$port])) continue;
@@ -222,7 +219,13 @@ function exec_ogp_module()
 							   "$startup_cmd|%|$cpu|%|$nice";
 					break;
 				case "steam_auto_update":
-					// TODO Something
+					$panelURL = getOGPSiteURL();
+					if($panelURL !== false){
+						$command = "wget -N \"" . $panelURL . "/api.php?action=autoUpdateSteamHome&homeid=" . $home_id . "&controlpass=" . $control_password . "\" > /dev/null 2>&1";
+					}else{
+						print_failure('Failed to retrieve panel URL.');
+						return 0;
+					}
 					break;
 			}
 			$job = $_POST['minute']." ".
