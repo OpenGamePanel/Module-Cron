@@ -54,7 +54,7 @@ function reloadJobs($server_homes, $remote_servers)
 					$dayOfTheWeek = $parts[4];
 					unset($parts[0],$parts[1],$parts[2],$parts[3],$parts[4]);
 					$command = implode(" ", $parts);
-					$retval = preg_match_all("/^%ACTION=(start|restart|stop)\|%\|(.*)$/", $command, $job_info );
+					$retval = preg_match_all("/^%ACTION=(start|restart|stop|steam_auto_update)\|%\|(.*)$/", $command, $job_info );
 					if($retval and !empty($job_info[1][0]))
 					{
 						//print_r($job_info);
@@ -73,6 +73,9 @@ function reloadJobs($server_homes, $remote_servers)
 							case 'stop':
 								list($home_id, $ip, $port, $control_protocol, 
 									 $control_password, $control_type, $home_path) = $server_args;
+								break;
+							case 'steam_auto_update':
+								// TODO SOMETHING
 								break;
 						}
 						if(!isset($server_homes[$home_id."_".$ip."_".$port])) continue;
@@ -105,7 +108,7 @@ function reloadJobs($server_homes, $remote_servers)
 }
 
 function get_action_selector($action = false) {
-	$server_actions = array('restart','stop','start');
+	$server_actions = array('restart','stop','start','steam_auto_update');
 	$select_action = '<select  style="width: 100px;" name="action">';
 	foreach($server_actions as $server_action)
 	{
@@ -216,6 +219,9 @@ function exec_ogp_module()
 					$command = "%ACTION=restart|%|$home_id|%|$ip|%|$port|%|$control_protocol|%|".
 							   "$control_password|%|$control_type|%|$home_path|%|$server_exe|%|$run_dir|%|".
 							   "$startup_cmd|%|$cpu|%|$nice";
+					break;
+				case "steam_auto_update":
+					// TODO SOMETHING
 					break;
 			}
 		}

@@ -28,6 +28,7 @@ define('day', "Tag");
 define('month', "Monat");
 define('day_of_the_week', "Tag/Woche");
 define('action', "Aktion");
+define('steam_auto_update', "Steam Auto Update");
 define('stop', "Stop");
 define('start', "Start");
 define('restart', "Neustart");
