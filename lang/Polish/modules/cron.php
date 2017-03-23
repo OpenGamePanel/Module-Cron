@@ -22,19 +22,19 @@
  *
  */
 
-define('minute', "Minute");
+define('minute', "Minuta");
 define('hour', "Godz");
 define('day', "Dni");
 define('month', "Miesiąc");
-define('day_of_the_week', "D/Week");
+define('day_of_the_week', "D/Tydzień");
 define('action', "Akcja");
-define('steam_auto_update', "Steam Auto Update");
+define('steam_auto_update', "Automatycznie aktualizacje Steam");
 define('stop', "Stop");
 define('start', "Start");
 define('restart', "Restart");
 define('command', "Komenda");
 define('add', "Dodaj");
-define('remove', "Usunąć");
+define('remove', "Usuń");
 define('now', "Teraz");
 define('schedule_new_job', "Zaplanować nowe zadanie");
 define('scheduled_jobs', "Zaplanowane zadania");
