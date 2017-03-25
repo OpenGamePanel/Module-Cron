@@ -28,7 +28,7 @@ define('day', "Nap");
 define('month', "Hónap");
 define('day_of_the_week', "N/Hét");
 define('action', "Művelet");
-define('steam_auto_update', "Steam Auto Update");
+define('steam_auto_update', "Steam Automatikus Frissítés");
 define('stop', "Leállítás");
 define('start', "Elindítás");
 define('restart', "Újraindítás");
