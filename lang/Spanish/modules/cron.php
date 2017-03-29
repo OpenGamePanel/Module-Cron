@@ -24,7 +24,7 @@
 
 define('minute', "Minuto");
 define('hour', "Hora");
-define('day', "Dia");
+define('day', "Día");
 define('month', "Mes");
 define('day_of_the_week', "D/Semana");
 define('action', "Acción");
