@@ -238,7 +238,7 @@ function exec_ogp_module()
 				case "steam_auto_update":
 					$panelURL = getOGPSiteURL();
 					if($panelURL !== false){
-						$command = "wget -N \"" . $panelURL . "/api.php?action=autoUpdateSteamHome&homeid=" . $home_id . "&controlpass=" . $control_password . "\" > /dev/null 2>&1";
+						$command = "wget -N \"" . $panelURL . "/ogp_api.php?action=autoUpdateSteamHome&homeid=" . $home_id . "&controlpass=" . $control_password . "\" > /dev/null 2>&1";
 					}else{
 						print_failure('Failed to retrieve panel URL.');
 						return 0;
