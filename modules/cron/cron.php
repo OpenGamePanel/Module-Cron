@@ -1,6 +1,5 @@
 <script type="text/javascript" src="js/modules/cron.js"></script>
 <?php
-$testOwn = "test";
 /*
  *
  * OGP - Open Game Panel
