@@ -1,5 +1,6 @@
 <script type="text/javascript" src="js/modules/cron.js"></script>
 <?php
+$redo = "lol";
 /*
  *
  * OGP - Open Game Panel
