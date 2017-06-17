@@ -22,23 +22,23 @@
  *
  */
 
-define('minute', "Minute");
-define('hour', "Hour");
-define('day', "Day");
-define('month', "Month");
-define('day_of_the_week', "D/Week");
-define('action', "Action");
-define('steam_auto_update', "Steam Auto Update");
-define('stop', "Stop");
-define('start', "Start");
-define('restart', "Restart");
-define('command', "Command");
-define('add', "Add");
-define('remove', "Remove");
-define('now', "Now");
-define('schedule_new_job', "Schedule a new job");
-define('scheduled_jobs', "Scheduled jobs");
-define('there_are_no_scheduled_jobs', "There are no scheduled jobs");
-define('cron_events', "Cron Events");
-define('refresh_interval', "Refresh Interval");
+define('minute', "دقيقة");
+define('hour', "ساعة");
+define('day', "يوم");
+define('month', "شهر");
+define('day_of_the_week', "يوم/أسبوع");
+define('action', "عمل");
+define('steam_auto_update', "التحديث التلقائي لSteam");
+define('stop', "إيقاف");
+define('start', "تشغيل");
+define('restart', "إعادة التشغيل");
+define('command', "الأمر");
+define('add', "إضافة");
+define('remove', "حذف");
+define('now', "الأن");
+define('schedule_new_job', "جدولة وظيفة جديدة");
+define('scheduled_jobs', "المهام المجدولة");
+define('there_are_no_scheduled_jobs', "لا توجد أية مهام مجدولة");
+define('cron_events', "أحداث الCron");
+define('refresh_interval', "الفاصل الزمني للتحديث");
 ?>
