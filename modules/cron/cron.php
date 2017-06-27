@@ -22,7 +22,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  */
-
 error_reporting(E_ALL);
 require_once('includes/lib_remote.php');
 require_once('modules/gamemanager/home_handling_functions.php');
@@ -134,7 +133,7 @@ function get_server_selector($server_homes, $homeid_ip_port = FALSE, $onchange =
 			$selected = ($homeid_ip_port and $homeid_ip_port == $server_home['home_id']."_".$server_home['ip']."_".$server_home['port']) ? 'selected="selected"' : '';
 			$select_game .= "<option value='". $server_home['home_id'] . "_" . $server_home['ip'] .
 							"_" . $server_home['port'] . "' $selected " . $additionalMarkup . ">" . $server_home['home_name'] . 
-							" - " . $server_home['ip'] . ":" .$server_home['port'] . " ( " . $server_home['remote_server_name'] . " )</option>\n";
+							" - " . checkDisplayPublicIP($server_home['display_public_ip'],$server_home['ip']) . ":" .$server_home['port'] . " ( " . $server_home['remote_server_name'] . " )</option>\n";
 		}
 	}
 	return $select_game .= "</select>\n";
