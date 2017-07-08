@@ -334,7 +334,7 @@ function exec_ogp_module()
 			<?php echo get_server_selector($server_homes, $homeid_ip_port);?>
 		</td>
 		<td>
-			<input style="width:60px;" type="submit" name="addJob" value="<?php echo add; ?>" />
+			<input style="" type="submit" name="addJob" value="<?php echo add; ?>" />
 		</td>
 	</tr>
 </table>
@@ -409,8 +409,8 @@ function exec_ogp_module()
 										<td style="width: 132px;">
 											<input type="hidden" name="job_id" value=\''.$jobId.'\' />
 											<input type="hidden" name="r_server_id" value=\''.$remote_server_id.'\' />
-											<input style="width:60px;" type="submit" name="editJob" value="'. edit .'" />
-											<input style="width:60px;" type="submit" name="removeJob" value="'. remove .'" />
+											<input style="" type="submit" name="editJob" value="'. edit .'" />
+											<input style="" type="submit" name="removeJob" value="'. remove .'" />
 											</form>
 										</td>
 									</tr>';
