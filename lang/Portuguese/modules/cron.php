@@ -2,7 +2,7 @@
 /*
  *
  * OGP - Open Game Panel
- * Copyright (C) 2008 - 2016 The OGP Development Team
+ * Copyright (C) 2008 - 2017 The OGP Development Team
  *
  * http://www.opengamepanel.org/
  *
@@ -22,23 +22,23 @@
  *
  */
 
-define('minute', "Minute");
-define('hour', "Hour");
-define('day', "Day");
-define('month', "Month");
-define('day_of_the_week', "D/Week");
-define('action', "Action");
-define('steam_auto_update', "Steam Auto Update");
-define('stop', "Stop");
-define('start', "Start");
-define('restart', "Restart");
-define('command', "Command");
-define('add', "Add");
-define('remove', "Remove");
-define('now', "Now");
-define('schedule_new_job', "Schedule a new job");
-define('scheduled_jobs', "Scheduled jobs");
-define('there_are_no_scheduled_jobs', "There are no scheduled jobs");
-define('cron_events', "Cron Events");
-define('refresh_interval', "Refresh Interval");
+define('minute', "Minuto");
+define('hour', "Hora");
+define('day', "Dia");
+define('month', "Mês");
+define('day_of_the_week', "D/Semana");
+define('action', "Ação");
+define('steam_auto_update', "Atualização automática do Steam");
+define('stop', "Pare");
+define('start', "Iniciar");
+define('restart', "Reiniciar");
+define('command', "Comando");
+define('add', "Adicionar");
+define('remove', "Remover");
+define('now', "Agora");
+define('schedule_new_job', "Agendar um novo trabalho");
+define('scheduled_jobs', "Trabalhos agendados");
+define('there_are_no_scheduled_jobs', "Não existem trabalhos agendados");
+define('cron_events', "Tarefas Cron");
+define('refresh_interval', "Intervalo de atualização");
 ?>

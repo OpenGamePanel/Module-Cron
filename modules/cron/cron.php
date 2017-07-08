@@ -3,7 +3,7 @@
 /*
  *
  * OGP - Open Game Panel
- * Copyright (C) Copyright (C) 2008 - 2012 The OGP Development Team
+ * Copyright (C) 2008 - 2017 The OGP Development Team
  *
  * http://www.opengamepanel.org/
  *
@@ -133,7 +133,7 @@ function get_server_selector($server_homes, $homeid_ip_port = FALSE, $onchange =
 			$selected = ($homeid_ip_port and $homeid_ip_port == $server_home['home_id']."_".$server_home['ip']."_".$server_home['port']) ? 'selected="selected"' : '';
 			$select_game .= "<option value='". $server_home['home_id'] . "_" . $server_home['ip'] .
 							"_" . $server_home['port'] . "' $selected " . $additionalMarkup . ">" . $server_home['home_name'] . 
-							" - " . $server_home['ip'] . ":" .$server_home['port'] . " ( " . $server_home['remote_server_name'] . " )</option>\n";
+							" - " . checkDisplayPublicIP($server_home['display_public_ip'],$server_home['ip']) . ":" .$server_home['port'] . " ( " . $server_home['remote_server_name'] . " )</option>\n";
 		}
 	}
 	return $select_game .= "</select>\n";
