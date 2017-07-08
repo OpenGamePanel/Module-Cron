@@ -426,7 +426,7 @@ function exec_ogp_module()
 	else
 		echo "<h3>". there_are_no_scheduled_jobs ."</h3>";
 ?>
-<table class='center' ><tr><td><a href='?m=administration&p=main' > << <?php echo back ?></a><?php if(!$boolShowedAdminLink){ echo '&nbsp; &nbsp; | &nbsp; &nbsp; ' . '<a href="home.php?m=cron&p=cron">' . get_lang('cron_admin_link_display_text') . '</a>'; }?></td></tr></table>
+<table class='center' ><tr><td><a href='?m=administration&p=main' > << <?php echo back ?></a><?php if(!$boolShowedAdminLink && $isAdmin){ echo '&nbsp; &nbsp; | &nbsp; &nbsp; ' . '<a href="home.php?m=cron&p=cron">' . get_lang('cron_admin_link_display_text') . '</a>'; }?></td></tr></table>
 <script type="text/javascript">
 $(document).ready(function() 
 	{
