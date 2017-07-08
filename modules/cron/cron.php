@@ -391,7 +391,7 @@ function exec_ogp_module()
 			<?php echo get_remote_server_selector($remote_servers, $remote_servers_offline);?>
 		</td>
 		<td>
-			<input style="width: 300px;" type="text" name="command" />
+			<input style="width: 100%; box-sizing: border-box;" type="text" name="command" />
 		</td>
 		<td>
 			<input style="" type="submit" name="addJob" value="<?php echo add; ?>" />
@@ -459,7 +459,7 @@ function exec_ogp_module()
 							get_server_selector($server_homes, $job['home_id']."_".$job['ip']."_".$job['port']);
 				else
 					$task = get_remote_server_selector($remote_servers, $remote_servers_offline, $remote_server_id).
-							'</td><td><input style="width: 300px;" type="text" name="command" value="'.str_replace("\"","&quot;",$job['command']).'" />';
+							'</td><td><input style="width: 100%; box-sizing: border-box;" type="text" name="command" value="'.str_replace("\"","&quot;",$job['command']).'" />';
 				
 				$user_jobs .=  '<tr>
 									<td style="width: 35px;" >
