@@ -106,7 +106,7 @@ function reloadJobs($server_homes, $remote_servers)
 
 function get_action_selector($action = false) {
 	$server_actions = array('restart','stop','start','steam_auto_update');
-	$select_action = '<select name="action">';
+	$select_action = '<select name="action" style="width: 100%;">';
 	foreach($server_actions as $server_action)
 	{
 		$selected = ($action and $action == $server_action) ? 'selected="selected"' : '';
@@ -141,7 +141,7 @@ function get_server_selector($server_homes, $homeid_ip_port = FALSE, $onchange =
 
 function get_remote_server_selector($r_servers, $remote_servers_offline, $remote_server_id = FALSE, $onchange = FALSE, $first_empty = FALSE ) {
 	$onchange_this_form_submit = $onchange ? 'onchange="this.form.submit();"' : '';
-	$select_rserver = "<select id='r_server_id' style='width: 100px;' name='r_server_id' $onchange_this_form_submit>\n";
+	$select_rserver = "<select id='r_server_id' style='width: 100%;' name='r_server_id' $onchange_this_form_submit>\n";
 	if($first_empty) $select_rserver .= '<option></option>';
 	foreach ( $r_servers as $r_server )
 	{

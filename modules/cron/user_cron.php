@@ -113,7 +113,7 @@ function reloadJobs($server_homes, $remote_servers)
 
 function get_action_selector($action = false) {
 	$server_actions = array('restart','stop','start','steam_auto_update');
-	$select_action = '<select name="action">';
+	$select_action = '<select name="action" style="width: 100%;">';
 	foreach($server_actions as $server_action)
 	{
 		$selected = ($action and $action == $server_action) ? 'selected="selected"' : '';
@@ -147,7 +147,7 @@ function get_server_selector($server_homes, $homeid_ip_port = FALSE, $onchange =
 
 function get_remote_server_selector($r_servers, $remote_servers_offline, $remote_server_id = FALSE, $onchange = FALSE) {
 	$onchange_this_form_submit = $onchange ? 'onchange="this.form.submit();"' : '';
-	$select_rserver = "<select  style='width: 100px;' name='r_server_id' $onchange_this_form_submit>\n";
+	$select_rserver = "<select  style='width: 100%;' name='r_server_id' $onchange_this_form_submit>\n";
 	foreach ( $r_servers as $r_server )
 	{
 		$selected = ($remote_server_id and $remote_server_id == $r_server['remote_server_id']) ? 'selected="selected"' : '';
@@ -333,7 +333,7 @@ function exec_ogp_module()
 		<td>
 			<?php echo get_server_selector($server_homes, $homeid_ip_port);?>
 		</td>
-		<td>
+		<td style="width: 132px;">
 			<input style="" type="submit" name="addJob" value="<?php echo add; ?>" />
 		</td>
 	</tr>
