@@ -295,7 +295,7 @@ function exec_ogp_module()
 		 get_remote_server_selector($remote_servers, $remote_servers_offline, $r_server_id, TRUE) .
 		 "</form></td></tr></table> <b style='font-size:1.4em;'>" . $refresh->getdiv($curtime) . "</b></pre>";
 ?>
-<table class="center">
+<table class="center hundred">
 	<tr>
 		<th>
 		<?php echo minute; ?>
@@ -391,7 +391,7 @@ function exec_ogp_module()
 			<?php echo get_remote_server_selector($remote_servers, $remote_servers_offline);?>
 		</td>
 		<td>
-			<input style="width: 490px;" type="text" name="command" />
+			<input style="width: 300px;" type="text" name="command" />
 		</td>
 		<td>
 			<input style="" type="submit" name="addJob" value="<?php echo add; ?>" />
@@ -414,7 +414,7 @@ function exec_ogp_module()
 	if ( !empty($jobsArray) )
 	{
 ?>
-<table class="center">
+<table class="center hundred">
 	<tr>
 		<td colspan='6' style="text-align:left;" >
 			<form  action='' method='GET'>
@@ -459,7 +459,7 @@ function exec_ogp_module()
 							get_server_selector($server_homes, $job['home_id']."_".$job['ip']."_".$job['port']);
 				else
 					$task = get_remote_server_selector($remote_servers, $remote_servers_offline, $remote_server_id).
-							'</td><td><input style="width: 490px;" type="text" name="command" value="'.str_replace("\"","&quot;",$job['command']).'" />';
+							'</td><td><input style="width: 300px;" type="text" name="command" value="'.str_replace("\"","&quot;",$job['command']).'" />';
 				
 				$user_jobs .=  '<tr>
 									<td style="width: 35px;" >
@@ -501,7 +501,7 @@ function exec_ogp_module()
 		echo "<h3>". there_are_no_scheduled_jobs ."</h3>";
 	}
 ?>
-<table class='center' ><tr><td><a href='javascript:history.go(-1)' > << <?php echo back ?></a></td></tr></table>
+<table class='center hundred' ><tr><td><a href='javascript:history.go(-1)' > << <?php echo back ?></a></td></tr></table>
 <script type="text/javascript">
 $(document).ready(function() 
 	{
