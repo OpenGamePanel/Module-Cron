@@ -501,7 +501,7 @@ function exec_ogp_module()
 		echo "<h3>". there_are_no_scheduled_jobs ."</h3>";
 	}
 ?>
-<table class='center' ><tr><td><a href='?m=administration&p=main' > << <?php echo back ?></a></td></tr></table>
+<table class='center' ><tr><td><a href='javascript:history.go(-1)' > << <?php echo back ?></a></td></tr></table>
 <script type="text/javascript">
 $(document).ready(function() 
 	{
