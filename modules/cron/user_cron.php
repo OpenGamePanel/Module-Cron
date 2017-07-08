@@ -160,10 +160,15 @@ function get_remote_server_selector($r_servers, $remote_servers_offline, $remote
 function exec_ogp_module() 
 {
 	global $db;
+	$isAdmin = $db->isAdmin($_SESSION['user_id']);
+
 	$homes = $db->getIpPortsForUser($_SESSION['user_id']);
 	if(!$homes)
 	{
-		print_failure('There are no game servers assigned');
+		print_failure(get_lang('cron_no_servers_tied_to_account'));
+		if($isAdmin){
+			echo '<a href="home.php?m=cron&p=cron">' . get_lang('cron_admin_link_display_text') . '</a>';
+		}
 		return 0;
 	}
 	

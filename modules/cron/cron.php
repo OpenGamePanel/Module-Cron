@@ -159,7 +159,7 @@ function exec_ogp_module()
 	$homes = $db->getIpPorts();
 	if(!$homes)
 	{
-		print_failure('There are no game servers assigned');
+		print_failure(get_lang('cron_admin_no_ogp_servers_to_display'));
 		return 0;
 	}
 	
