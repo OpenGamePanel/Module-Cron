@@ -22,26 +22,26 @@
  *
  */
 
-define('minute', "Minute");
-define('hour', "Hour");
-define('day', "Day");
-define('month', "Month");
-define('day_of_the_week', "D/Week");
-define('action', "Action");
-define('steam_auto_update', "Steam Auto Update");
-define('stop', "Stop");
+define('minute', "Минуты");
+define('hour', "Часы");
+define('day', "Дни");
+define('month', "Месяц");
+define('day_of_the_week', "Неделя");
+define('action', "Действие");
+define('steam_auto_update', "Автообновление Steam");
+define('stop', "Стоп");
 define('start', "Запуск");
-define('restart', "Restart");
+define('restart', "Перезапустить");
 define('command', "RCON&nbsp;команда");
-define('add', "Add");
-define('remove', "Remove");
-define('now', "Now");
-define('schedule_new_job', "Schedule a new job");
-define('scheduled_jobs', "Scheduled jobs");
-define('there_are_no_scheduled_jobs', "There are no scheduled jobs");
-define('cron_events', "Cron Events");
+define('add', "Добавить");
+define('remove', "Удалить");
+define('now', "Сейчас");
+define('schedule_new_job', "Запланировать новое задание");
+define('scheduled_jobs', "Запланированные задания");
+define('there_are_no_scheduled_jobs', "Запланированных заданий нет");
+define('cron_events', "События задания");
 define('refresh_interval', "Интервал обновления консоли");
-define('cron_no_servers_tied_to_account', "There are no game servers directly assigned to your account.");
-define('cron_admin_link_display_text', "Cron Administration (All Servers)");
-define('cron_admin_no_ogp_servers_to_display', "There aren't any game servers currently configured in OGP.");
+define('cron_no_servers_tied_to_account', "Для вашей учетной записи не назначен ни один игровой сервер.");
+define('cron_admin_link_display_text', "Администрирование Планировщика (все сервер)");
+define('cron_admin_no_ogp_servers_to_display', "Нет ни одного игрового сервер в конфигурации OGP.");
 ?>
