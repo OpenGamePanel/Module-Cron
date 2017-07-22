@@ -22,24 +22,24 @@
  *
  */
 
-define('minute', "Minute");
-define('hour', "Hour");
-define('day', "Day");
-define('month', "Month");
-define('day_of_the_week', "D/Week");
+define('minute', "دقیقه");
+define('hour', "ساعت");
+define('day', "روز");
+define('month', "ماه");
+define('day_of_the_week', "روز هفته");
 define('action', "Action");
-define('steam_auto_update', "Steam Auto Update");
-define('stop', "Stop");
-define('start', "Start");
-define('restart', "Restart");
-define('command', "Command");
-define('add', "Add");
-define('remove', "Remove");
-define('now', "Now");
+define('steam_auto_update', "به روزرسانی خودکار از Steam");
+define('stop', "توقف");
+define('start', "شروع");
+define('restart', "شروع دوباره");
+define('command', "دستور");
+define('add', "اضافه کردن");
+define('remove', "حذف کردن");
+define('now', "حالا");
 define('schedule_new_job', "Schedule a new job");
 define('scheduled_jobs', "Scheduled jobs");
 define('there_are_no_scheduled_jobs', "There are no scheduled jobs");
-define('cron_events', "Cron Events");
+define('cron_events', "رویداد های Cron");
 define('refresh_interval', "Refresh Interval");
 define('cron_no_servers_tied_to_account', "There are no game servers directly assigned to your account.");
 define('cron_admin_link_display_text', "Cron Administration (All Servers)");
