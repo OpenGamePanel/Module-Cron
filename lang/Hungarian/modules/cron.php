@@ -42,6 +42,6 @@ define('there_are_no_scheduled_jobs', "Nincsenek ütemezett feladatok");
 define('cron_events', "Cron események");
 define('refresh_interval', "Frissítési intervallum");
 define('cron_no_servers_tied_to_account', "There are no game servers directly assigned to your account.");
-define('cron_admin_link_display_text', "Cron Administration (All Servers)");
+define('cron_admin_link_display_text', "Cron adminisztráció (minden szerver)");
 define('cron_admin_no_ogp_servers_to_display', "There aren't any game servers currently configured in OGP.");
 ?>
