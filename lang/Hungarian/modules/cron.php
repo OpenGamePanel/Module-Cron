@@ -28,7 +28,7 @@ define('day', "Nap");
 define('month', "Hónap");
 define('day_of_the_week', "N/Hét");
 define('action', "Művelet");
-define('steam_auto_update', "Steam Automatikus Frissítés");
+define('steam_auto_update', "Steam automatikus frissítés");
 define('stop', "Leállítás");
 define('start', "Elindítás");
 define('restart', "Újraindítás");
@@ -41,7 +41,7 @@ define('scheduled_jobs', "Ütemezett feladatok");
 define('there_are_no_scheduled_jobs', "Nincsenek ütemezett feladatok");
 define('cron_events', "Cron események");
 define('refresh_interval', "Frissítési intervallum");
-define('cron_no_servers_tied_to_account', "There are no game servers directly assigned to your account.");
+define('cron_no_servers_tied_to_account', "Nincsenek játékszerverek közvetlenül hozzárendelve a fiókodhoz.");
 define('cron_admin_link_display_text', "Cron adminisztráció (minden szerver)");
-define('cron_admin_no_ogp_servers_to_display', "There aren't any game servers currently configured in OGP.");
+define('cron_admin_no_ogp_servers_to_display', "Jelenleg nincsenek játékszerverek beállítva az OGP-ben.");
 ?>
