@@ -42,6 +42,6 @@ define('there_are_no_scheduled_jobs', "Запланированных задан
 define('cron_events', "События задания");
 define('refresh_interval', "Интервал обновления консоли");
 define('cron_no_servers_tied_to_account', "Для вашей учетной записи не назначен ни один игровой сервер.");
-define('cron_admin_link_display_text', "Администрирование Планировщика (все сервер)");
+define('cron_admin_link_display_text', "Администрирование Планировщика (все сервера)");
 define('cron_admin_no_ogp_servers_to_display', "Нет ни одного игрового сервер в конфигурации OGP.");
 ?>
