@@ -41,7 +41,7 @@ define('scheduled_jobs', "المهام المجدولة");
 define('there_are_no_scheduled_jobs', "لا توجد أية مهام مجدولة");
 define('cron_events', "أحداث الCron");
 define('refresh_interval', "الفاصل الزمني للتحديث");
-define('cron_no_servers_tied_to_account', "There are no game servers directly assigned to your account.");
-define('cron_admin_link_display_text', "Cron Administration (All Servers)");
-define('cron_admin_no_ogp_servers_to_display', "There aren't any game servers currently configured in OGP.");
+define('cron_no_servers_tied_to_account', "لا توجد خوادم لعبة تعيين مباشرة إلى حسابك.");
+define('cron_admin_link_display_text', "إدارة كرون (جميع الخوادم)");
+define('cron_admin_no_ogp_servers_to_display', "ليست هناك أي ملقمات اللعبة التي تم تكوينها حاليا في أوبن قيم بانل");
 ?>
