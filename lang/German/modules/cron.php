@@ -41,7 +41,7 @@ define('scheduled_jobs', "Geplante Aufgaben");
 define('there_are_no_scheduled_jobs', "Es gibt keine geplanten Aufgaben");
 define('cron_events', "Cron Ereignisse");
 define('refresh_interval', "Aktualisierungsinterval");
-define('cron_no_servers_tied_to_account', "There are no game servers directly assigned to your account.");
-define('cron_admin_link_display_text', "Cron Administration (All Servers)");
-define('cron_admin_no_ogp_servers_to_display', "There aren't any game servers currently configured in OGP.");
+define('cron_no_servers_tied_to_account', "Ihrem Konto sind keine Spieleserver direkt zugeordnet.");
+define('cron_admin_link_display_text', "Cron Administration (Alle Server)");
+define('cron_admin_no_ogp_servers_to_display', "Derzeit sind keine Spieleserver in OGP konfiguriert.");
 ?>
