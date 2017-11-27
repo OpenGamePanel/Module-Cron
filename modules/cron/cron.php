@@ -28,54 +28,6 @@ require_once('modules/gamemanager/home_handling_functions.php');
 require_once('modules/config_games/server_config_parser.php');
 require_once('modules/cron/shared_cron_functions.php');
 
-function get_action_selector($action = false) {
-	$server_actions = array('restart','stop','start','steam_auto_update');
-	$select_action = '<select name="action" style="width: 100%;">';
-	foreach($server_actions as $server_action)
-	{
-		$selected = ($action and $action == $server_action) ? 'selected="selected"' : '';
-		$select_action .= '<option value="'.$server_action.'" '.$selected.'>'.get_lang($server_action).'</option>';
-	}
-	return $select_action .= '</select>';
-}
-
-function get_server_selector($server_homes, $homeid_ip_port = FALSE, $onchange = FALSE) {
-	$onchange_this_form_submit = $onchange ? 'onchange="this.form.submit();"' : '';
-	$select_game = "<select style='text-overflow: ellipsis; width: 100%;' name='homeid_ip_port' $onchange_this_form_submit>\n";
-	if($server_homes != FALSE)
-	{
-		
-		foreach ( $server_homes as $server_home )
-		{
-			// Find out if it's a steamcmd server
-			$additionalMarkup = "";
-			$server_xml = read_server_config(SERVER_CONFIG_LOCATION."/".$server_home['home_cfg_file']);
-			if( $server_xml->installer == "steamcmd" ){
-				$additionalMarkup = 'steam="1"';
-			}			
-			
-			$selected = ($homeid_ip_port and $homeid_ip_port == $server_home['home_id']."_".$server_home['ip']."_".$server_home['port']) ? 'selected="selected"' : '';
-			$select_game .= "<option value='". $server_home['home_id'] . "_" . $server_home['ip'] .
-							"_" . $server_home['port'] . "' $selected " . $additionalMarkup . ">" . $server_home['home_name'] . 
-							" - " . checkDisplayPublicIP($server_home['display_public_ip'],$server_home['ip']) . ":" .$server_home['port'] . " ( " . $server_home['remote_server_name'] . " )</option>\n";
-		}
-	}
-	return $select_game .= "</select>\n";
-}
-
-function get_remote_server_selector($r_servers, $remote_servers_offline, $remote_server_id = FALSE, $onchange = FALSE, $first_empty = FALSE ) {
-	$onchange_this_form_submit = $onchange ? 'onchange="this.form.submit();"' : '';
-	$select_rserver = "<select id='r_server_id' style='width: 100%;' name='r_server_id' $onchange_this_form_submit>\n";
-	if($first_empty) $select_rserver .= '<option></option>';
-	foreach ( $r_servers as $r_server )
-	{
-		$selected = ($remote_server_id and $remote_server_id == $r_server['remote_server_id']) ? 'selected="selected"' : '';
-		$offline = isset($remote_servers_offline[$r_server['remote_server_id']]) ? ' (' . offline . ')' : '';
-		$select_rserver .= "<option value='". $r_server['remote_server_id'] . "' $selected>" . $r_server['remote_server_name'] . "$offline</option>\n";
-	}
-	return $select_rserver .= "</select>\n";
-}
-
 function exec_ogp_module() 
 {
 	global $db;
@@ -210,7 +162,7 @@ function exec_ogp_module()
 	$homeid_ip_port = $homeid_ip_port == 0 ? key($server_homes) : $homeid_ip_port;
 	$curtime = $refresh->add( "home.php?m=cron&p=thetime&r_server_id=$r_server_id&type=cleared" );
 	echo "<pre class='log' ><table><tr><td>" . now . 
-		 "&nbsp;</td><td><form action='' method='POST' >" . get_server_selector($server_homes, $homeid_ip_port, TRUE) . 
+		 "&nbsp;</td><td><form action='' method='POST' >" . get_server_selector($server_homes, $homeid_ip_port, TRUE, true) . 
 		 "</form></td><td><form action='' method='POST' >" .
 		 get_remote_server_selector($remote_servers, $remote_servers_offline, $r_server_id, TRUE) .
 		 "</form></td></tr></table> <b style='font-size:1.4em;'>" . $refresh->getdiv($curtime) . "</b></pre>";
@@ -260,7 +212,7 @@ function exec_ogp_module()
 			<?php echo get_action_selector();?>
 		</td>
 		<td>
-			<?php echo get_server_selector($server_homes, $homeid_ip_port);?>
+			<?php echo get_server_selector($server_homes, $homeid_ip_port, FALSE, true);?>
 		</td>
 		<td>
 			<input style="" type="submit" name="addJob" value="<?php echo add; ?>" />
@@ -374,9 +326,18 @@ function exec_ogp_module()
 		{
 			foreach($jobs as $jobId => $job)
 			{
-				if(isset($job['action']))				
+				if(isset($job['action'])){	
+					if(hasValue($job['home_id']) && hasValue($job['ip']) && hasValue($job['port'])){
+						$idStr = $job['home_id']."_".$job['ip']."_".$job['port'];				
+					}else if(hasValue($job['home_id'])){
+						$idStr = $job['home_id'];
+					}else{
+						$idStr = false;
+					}
+								
 					$task = get_action_selector($job['action'])."</td><td>".
-							get_server_selector($server_homes, $job['home_id']."_".$job['ip']."_".$job['port']);
+							get_server_selector($server_homes, $idStr, FALSE, TRUE);
+				}
 				else
 					$task = get_remote_server_selector($remote_servers, $remote_servers_offline, $remote_server_id).
 							'</td><td><input style="width: 100%; box-sizing: border-box;" type="text" name="command" value="'.str_replace("\"","&quot;",$job['command']).'" />';

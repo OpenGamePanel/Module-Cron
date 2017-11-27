@@ -192,4 +192,57 @@ function updateCronJobPasswords($db, $remote, $changedHomeId){
 		}
 	}
 }
+
+function get_action_selector($action = false) {
+	$server_actions = array('restart','stop','start','steam_auto_update');
+	$select_action = '<select name="action" style="width: 100%;">';
+	foreach($server_actions as $server_action)
+	{
+		$selected = ($action and $action == $server_action) ? 'selected="selected"' : '';
+		$select_action .= '<option value="'.$server_action.'" '.$selected.'>'.get_lang($server_action).'</option>';
+	}
+	return $select_action .= '</select>';
+}
+
+function get_server_selector($server_homes, $homeid_ip_port = FALSE, $onchange = FALSE, $includeRemoteName = false) {
+	$onchange_this_form_submit = $onchange ? 'onchange="this.form.submit();"' : '';
+	$select_game = "<select style='text-overflow: ellipsis; width: 100%;' name='homeid_ip_port' $onchange_this_form_submit>\n";
+	if($server_homes != FALSE)
+	{
+		
+		foreach ( $server_homes as $server_home )
+		{
+			// Find out if it's a steamcmd server
+			$additionalMarkup = "";
+			$server_xml = read_server_config(SERVER_CONFIG_LOCATION."/".$server_home['home_cfg_file']);
+			if( $server_xml->installer == "steamcmd" ){
+				$additionalMarkup = 'steam="1"';
+			}			
+			
+			$selected = ($homeid_ip_port and ($homeid_ip_port == $server_home['home_id']."_".$server_home['ip']."_".$server_home['port'] || trim($homeid_ip_port) == trim($server_home['home_id']))) ? 'selected="selected"' : '';
+			$select_game .= "<option value='". $server_home['home_id'] . "_" . $server_home['ip'] .
+							"_" . $server_home['port'] . "' $selected " . $additionalMarkup . ">" . $server_home['home_name'] . 
+							" - " . checkDisplayPublicIP($server_home['display_public_ip'],$server_home['ip']) . ":" .$server_home['port'];
+			if($includeRemoteName){
+				$select_game .= " ( " . $server_home['remote_server_name'] . " )";
+			}
+			
+			$select_game .= "</option>\n";
+		}
+	}
+	return $select_game .= "</select>\n";
+}
+
+function get_remote_server_selector($r_servers, $remote_servers_offline, $remote_server_id = FALSE, $onchange = FALSE, $first_empty = FALSE ) {
+	$onchange_this_form_submit = $onchange ? 'onchange="this.form.submit();"' : '';
+	$select_rserver = "<select id='r_server_id' style='width: 100%;' name='r_server_id' $onchange_this_form_submit>\n";
+	if($first_empty) $select_rserver .= '<option></option>';
+	foreach ( $r_servers as $r_server )
+	{
+		$selected = ($remote_server_id and $remote_server_id == $r_server['remote_server_id']) ? 'selected="selected"' : '';
+		$offline = isset($remote_servers_offline[$r_server['remote_server_id']]) ? ' (' . offline . ')' : '';
+		$select_rserver .= "<option value='". $r_server['remote_server_id'] . "' $selected>" . $r_server['remote_server_name'] . "$offline</option>\n";
+	}
+	return $select_rserver .= "</select>\n";
+}
 ?>
