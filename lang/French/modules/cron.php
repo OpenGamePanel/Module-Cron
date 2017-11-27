@@ -41,4 +41,7 @@ define('scheduled_jobs', "Actions planifiées");
 define('there_are_no_scheduled_jobs', "Pas d'actions planifiées");
 define('cron_events', "Logs des Événements Planifiés");
 define('refresh_interval', "Intervalle d'actualisation");
+define('cron_no_servers_tied_to_account', "Il n'y a pas de serveur assigné sur votre compte.");
+define('cron_admin_link_display_text', "Administration Cron (Tous les Serveurs)");
+define('cron_admin_no_ogp_servers_to_display', "Il n'y a pas de serveur de jeu configuré dans OGP.");
 ?>
