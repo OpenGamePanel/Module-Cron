@@ -26,90 +26,7 @@ error_reporting(E_ALL);
 require_once('includes/lib_remote.php');
 require_once('modules/gamemanager/home_handling_functions.php');
 require_once('modules/config_games/server_config_parser.php');
-function reloadJobs($server_homes, $remote_servers)
-{
-	$remote_servers_offline = array();
-	$jobsArray = array();
-	foreach( $remote_servers as $remote_server )
-	{
-		$remote = new OGPRemoteLibrary($remote_server['agent_ip'], $remote_server['agent_port'], $remote_server['encryption_key'], $remote_server['timeout']);
-		$rhost_id = $remote_server['remote_server_id'];
-		if($remote->status_chk() != 1)
-		{
-			$remote_servers_offline[$rhost_id] = $remote_server;
-			continue;
-		}
-		else
-		{
-			$jobs = $remote->scheduler_list_tasks();
-			if($jobs != -1)
-			{
-				foreach($jobs as $jobId => $job)
-				{
-					$parts = explode(" ", $job);
-					$minute = $parts[0];
-					$hour = $parts[1];
-					$dayOfTheMonth = $parts[2];
-					$month = $parts[3];
-					$dayOfTheWeek = $parts[4];
-					unset($parts[0],$parts[1],$parts[2],$parts[3],$parts[4]);
-					$command = implode(" ", $parts);
-					$retval = preg_match_all("/^%ACTION=(start|restart|stop)\|%\|(.*)$/", $command, $job_info );
-					if($retval and !empty($job_info[1][0]))
-					{
-						//print_r($job_info);
-						$action = $job_info[1][0];
-						$server_args = explode("|%|", $job_info[2][0]);
-						switch ($action) {
-							case 'start':
-								list($home_id, $home_path, $server_exe, $run_dir,
-									 $startup_cmd, $port, $ip, $cpu, $nice) = $server_args;
-								break;
-							case 'restart':
-								list($home_id, $ip, $port, $control_protocol, 
-									 $control_password, $control_type, $home_path, 
-									 $server_exe, $run_dir, $startup_cmd, $cpu, $nice) = $server_args;
-								break;
-							case 'stop':
-								list($home_id, $ip, $port, $control_protocol, 
-									 $control_password, $control_type, $home_path) = $server_args;
-								break;
-						}
-						if(!isset($server_homes[$home_id."_".$ip."_".$port])) continue;
-						$jobsArray[$rhost_id][$jobId] = array( 'job' => $job, 
-															   'minute' => $minute, 
-															   'hour' => $hour, 
-															   'dayOfTheMonth' => $dayOfTheMonth, 
-															   'month' => $month, 
-															   'dayOfTheWeek' => $dayOfTheWeek,
-															   'action' => $action,
-															   'home_id' => $home_id,
-															   'ip' => $ip,
-															   'port' => $port);
-					}else if(stripos($command, "homeid=")){
-						$homeId = substr($command, stripos($command, "homeid=") + 7);
-						if(stripos($homeId, "&")){
-							$homeId = substr($homeId, 0, stripos($homeId, "&"));
-						}else{
-							$homeId = substr($homeId, 0);
-						}
-						
-						$jobsArray[$rhost_id][$jobId] = array( 'job' => $job, 
-															   'minute' => $minute, 
-															   'hour' => $hour, 
-															   'dayOfTheMonth' => $dayOfTheMonth, 
-															   'month' => $month, 
-															   'dayOfTheWeek' => $dayOfTheWeek,
-															   'command' => $command,
-															   'action' => 'steam_auto_update',
-															   'home_id' => $homeId);
-					}
-				}
-			}
-		}
-	}
-	return array($jobsArray, $remote_servers_offline);
-}
+require_once('modules/cron/shared_cron_functions.php');
 
 function get_action_selector($action = false) {
 	$server_actions = array('restart','stop','start','steam_auto_update');
@@ -228,28 +145,24 @@ function exec_ogp_module()
 			$cpu = $game_home['cpu_affinity'];
 			$nice = $game_home['nice'];
 			
+			$panelURL = getOGPSiteURL();
+			if($panelURL === false){
+				print_failure('Failed to retrieve panel URL.');
+				return 0;
+			}
+			
 			switch ($_POST['action']) {
 				case "stop":
-					$command = "%ACTION=stop|%|$home_id|%|$ip|%|$port|%|".
-							   "$control_protocol|%|$control_password|%|$control_type|%|$home_path";
+					$command = "wget -N \"" . $panelURL . "/ogp_api.php?action=stopServer&homeid=" . $home_id . "&controlpass=" . $control_password . "\" --no-check-certificate > /dev/null 2>&1";
 					break;
 				case "start":
-					$command = "%ACTION=start|%|$home_id|%|$home_path|%|$server_exe|%|$run_dir|%|".
-							   "$startup_cmd|%|$port|%|$ip|%|$cpu|%|$nice";
+					$command = "wget -N \"" . $panelURL . "/ogp_api.php?action=startServer&homeid=" . $home_id . "&controlpass=" . $control_password . "\" --no-check-certificate > /dev/null 2>&1";
 					break;
 				case "restart":
-					$command = "%ACTION=restart|%|$home_id|%|$ip|%|$port|%|$control_protocol|%|".
-							   "$control_password|%|$control_type|%|$home_path|%|$server_exe|%|$run_dir|%|".
-							   "$startup_cmd|%|$cpu|%|$nice";
+					$command = "wget -N \"" . $panelURL . "/ogp_api.php?action=restartServer&homeid=" . $home_id . "&controlpass=" . $control_password . "\" --no-check-certificate > /dev/null 2>&1";
 					break;
 				case "steam_auto_update":
-					$panelURL = getOGPSiteURL();
-					if($panelURL !== false){
-						$command = "wget -N \"" . $panelURL . "/ogp_api.php?action=autoUpdateSteamHome&homeid=" . $home_id . "&controlpass=" . $control_password . "\" > /dev/null 2>&1";
-					}else{
-						print_failure('Failed to retrieve panel URL.');
-						return 0;
-					}
+					$command = "wget -N \"" . $panelURL . "/ogp_api.php?action=autoUpdateSteamHome&homeid=" . $home_id . "&controlpass=" . $control_password . "\" --no-check-certificate > /dev/null 2>&1";
 					break;
 			}
 			$job = $_POST['minute']." ".
