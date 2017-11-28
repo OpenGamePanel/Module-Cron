@@ -26,131 +26,7 @@ error_reporting(E_ALL);
 require_once('includes/lib_remote.php');
 require_once('modules/gamemanager/home_handling_functions.php');
 require_once('modules/config_games/server_config_parser.php');
-function reloadJobs($server_homes, $remote_servers)
-{
-	$remote_servers_offline = array();
-	$jobsArray = array();
-	foreach( $remote_servers as $remote_server )
-	{
-		$remote = new OGPRemoteLibrary($remote_server['agent_ip'], $remote_server['agent_port'], $remote_server['encryption_key'], $remote_server['timeout']);
-		$rhost_id = $remote_server['remote_server_id'];
-		if($remote->status_chk() != 1)
-		{
-			$remote_servers_offline[$rhost_id] = $remote_server;
-			continue;
-		}
-		else
-		{
-			$jobs = $remote->scheduler_list_tasks();
-			if($jobs != -1)
-			{
-				foreach($jobs as $jobId => $job)
-				{
-					$parts = explode(" ", $job);
-					$minute = $parts[0];
-					$hour = $parts[1];
-					$dayOfTheMonth = $parts[2];
-					$month = $parts[3];
-					$dayOfTheWeek = $parts[4];
-					unset($parts[0],$parts[1],$parts[2],$parts[3],$parts[4]);
-					$command = implode(" ", $parts);
-					$retval = preg_match_all("/^%ACTION=(start|restart|stop)\|%\|(.*)$/", $command, $job_info );
-					if($retval and !empty($job_info[1][0]))
-					{
-						//print_r($job_info);
-						$action = $job_info[1][0];
-						$server_args = explode("|%|", $job_info[2][0]);
-						switch ($action) {
-							case 'start':
-								list($home_id, $home_path, $server_exe, $run_dir,
-									 $startup_cmd, $port, $ip, $cpu, $nice) = $server_args;
-								break;
-							case 'restart':
-								list($home_id, $ip, $port, $control_protocol, 
-									 $control_password, $control_type, $home_path, 
-									 $server_exe, $run_dir, $startup_cmd, $cpu, $nice) = $server_args;
-								break;
-							case 'stop':
-								list($home_id, $ip, $port, $control_protocol, 
-									 $control_password, $control_type, $home_path) = $server_args;
-								break;
-						}
-						if(!isset($server_homes[$home_id."_".$ip."_".$port])) continue;
-						$jobsArray[$rhost_id][$jobId] = array( 'job' => $job, 
-															   'minute' => $minute, 
-															   'hour' => $hour, 
-															   'dayOfTheMonth' => $dayOfTheMonth, 
-															   'month' => $month, 
-															   'dayOfTheWeek' => $dayOfTheWeek,
-															   'action' => $action,
-															   'home_id' => $home_id,
-															   'ip' => $ip,
-															   'port' => $port);
-					}
-					else
-					{	
-						$jobsArray[$rhost_id][$jobId] = array( 'job' => $job, 
-															   'minute' => $minute, 
-															   'hour' => $hour, 
-															   'dayOfTheMonth' => $dayOfTheMonth, 
-															   'month' => $month, 
-															   'dayOfTheWeek' => $dayOfTheWeek, 
-															   'command' => $command);
-					}
-				}
-			}
-		}
-	}
-	return array($jobsArray, $remote_servers_offline);
-}
-
-function get_action_selector($action = false) {
-	$server_actions = array('restart','stop','start','steam_auto_update');
-	$select_action = '<select name="action" style="width: 100%;">';
-	foreach($server_actions as $server_action)
-	{
-		$selected = ($action and $action == $server_action) ? 'selected="selected"' : '';
-		$select_action .= '<option value="'.$server_action.'" '.$selected.'>'.get_lang($server_action).'</option>';
-	}
-	return $select_action .= '</select>';
-}
-
-function get_server_selector($server_homes, $homeid_ip_port = FALSE, $onchange = FALSE) {
-	$onchange_this_form_submit = $onchange ? 'onchange="this.form.submit();"' : '';
-	$select_game = "<select style='text-overflow: ellipsis; width: 100%;' name='homeid_ip_port' $onchange_this_form_submit>\n";
-	if($server_homes != FALSE)
-	{
-		
-		foreach ( $server_homes as $server_home )
-		{
-			// Find out if it's a steamcmd server
-			$additionalMarkup = "";
-			$server_xml = read_server_config(SERVER_CONFIG_LOCATION."/".$server_home['home_cfg_file']);
-			if( $server_xml->installer == "steamcmd" ){
-				$additionalMarkup = 'steam="1"';
-			}			
-			
-			$selected = ($homeid_ip_port and $homeid_ip_port == $server_home['home_id']."_".$server_home['ip']."_".$server_home['port']) ? 'selected="selected"' : '';
-			$select_game .= "<option value='". $server_home['home_id'] . "_" . $server_home['ip'] .
-							"_" . $server_home['port'] . "' $selected " . $additionalMarkup . ">" . $server_home['home_name'] . 
-							" - " . checkDisplayPublicIP($server_home['display_public_ip'],$server_home['ip']) . ":" .$server_home['port'] . " ( " . $server_home['remote_server_name'] . " )</option>\n";
-		}
-	}
-	return $select_game .= "</select>\n";
-}
-
-function get_remote_server_selector($r_servers, $remote_servers_offline, $remote_server_id = FALSE, $onchange = FALSE, $first_empty = FALSE ) {
-	$onchange_this_form_submit = $onchange ? 'onchange="this.form.submit();"' : '';
-	$select_rserver = "<select id='r_server_id' style='width: 100%;' name='r_server_id' $onchange_this_form_submit>\n";
-	if($first_empty) $select_rserver .= '<option></option>';
-	foreach ( $r_servers as $r_server )
-	{
-		$selected = ($remote_server_id and $remote_server_id == $r_server['remote_server_id']) ? 'selected="selected"' : '';
-		$offline = isset($remote_servers_offline[$r_server['remote_server_id']]) ? ' (' . offline . ')' : '';
-		$select_rserver .= "<option value='". $r_server['remote_server_id'] . "' $selected>" . $r_server['remote_server_name'] . "$offline</option>\n";
-	}
-	return $select_rserver .= "</select>\n";
-}
+require_once('modules/cron/shared_cron_functions.php');
 
 function exec_ogp_module() 
 {
@@ -211,28 +87,24 @@ function exec_ogp_module()
 			$cpu = $game_home['cpu_affinity'];
 			$nice = $game_home['nice'];
 			
+			$panelURL = getOGPSiteURL();
+			if($panelURL === false){
+				print_failure('Failed to retrieve panel URL.');
+				return 0;
+			}
+			
 			switch ($_POST['action']) {
 				case "stop":
-					$command = "%ACTION=stop|%|$home_id|%|$ip|%|$port|%|".
-							   "$control_protocol|%|$control_password|%|$control_type|%|$home_path";
+					$command = "wget -qO- \"" . $panelURL . "/ogp_api.php?action=stopServer&homeid=" . $home_id . "&controlpass=" . $control_password . "\" --no-check-certificate > /dev/null 2>&1";
 					break;
 				case "start":
-					$command = "%ACTION=start|%|$home_id|%|$home_path|%|$server_exe|%|$run_dir|%|".
-							   "$startup_cmd|%|$port|%|$ip|%|$cpu|%|$nice";
+					$command = "wget -qO- \"" . $panelURL . "/ogp_api.php?action=startServer&homeid=" . $home_id . "&controlpass=" . $control_password . "\" --no-check-certificate > /dev/null 2>&1";
 					break;
 				case "restart":
-					$command = "%ACTION=restart|%|$home_id|%|$ip|%|$port|%|$control_protocol|%|".
-							   "$control_password|%|$control_type|%|$home_path|%|$server_exe|%|$run_dir|%|".
-							   "$startup_cmd|%|$cpu|%|$nice";
+					$command = "wget -qO- \"" . $panelURL . "/ogp_api.php?action=restartServer&homeid=" . $home_id . "&controlpass=" . $control_password . "\" --no-check-certificate > /dev/null 2>&1";
 					break;
 				case "steam_auto_update":
-					$panelURL = getOGPSiteURL();
-					if($panelURL !== false){
-						$command = "wget -N \"" . $panelURL . "/ogp_api.php?action=autoUpdateSteamHome&homeid=" . $home_id . "&controlpass=" . $control_password . "\" > /dev/null 2>&1";
-					}else{
-						print_failure('Failed to retrieve panel URL.');
-						return 0;
-					}
+					$command = "wget -qO- \"" . $panelURL . "/ogp_api.php?action=autoUpdateSteamHome&homeid=" . $home_id . "&controlpass=" . $control_password . "\" --no-check-certificate > /dev/null 2>&1";
 					break;
 			}
 		}
@@ -290,7 +162,7 @@ function exec_ogp_module()
 	$homeid_ip_port = $homeid_ip_port == 0 ? key($server_homes) : $homeid_ip_port;
 	$curtime = $refresh->add( "home.php?m=cron&p=thetime&r_server_id=$r_server_id&type=cleared" );
 	echo "<pre class='log' ><table><tr><td>" . now . 
-		 "&nbsp;</td><td><form action='' method='POST' >" . get_server_selector($server_homes, $homeid_ip_port, TRUE) . 
+		 "&nbsp;</td><td><form action='' method='POST' >" . get_server_selector($server_homes, $homeid_ip_port, TRUE, true) . 
 		 "</form></td><td><form action='' method='POST' >" .
 		 get_remote_server_selector($remote_servers, $remote_servers_offline, $r_server_id, TRUE) .
 		 "</form></td></tr></table> <b style='font-size:1.4em;'>" . $refresh->getdiv($curtime) . "</b></pre>";
@@ -340,7 +212,7 @@ function exec_ogp_module()
 			<?php echo get_action_selector();?>
 		</td>
 		<td>
-			<?php echo get_server_selector($server_homes, $homeid_ip_port);?>
+			<?php echo get_server_selector($server_homes, $homeid_ip_port, FALSE, true);?>
 		</td>
 		<td>
 			<input style="" type="submit" name="addJob" value="<?php echo add; ?>" />
@@ -454,9 +326,18 @@ function exec_ogp_module()
 		{
 			foreach($jobs as $jobId => $job)
 			{
-				if(isset($job['action']))				
+				if(isset($job['action'])){	
+					if(array_key_exists('home_id', $job) && array_key_exists('ip', $job) && array_key_exists('port', $job) && hasValue($job['home_id']) && hasValue($job['ip']) && hasValue($job['port'])){
+						$idStr = $job['home_id']."_".$job['ip']."_".$job['port'];				
+					}else if(hasValue($job['home_id'])){
+						$idStr = $job['home_id'];
+					}else{
+						$idStr = false;
+					}
+								
 					$task = get_action_selector($job['action'])."</td><td>".
-							get_server_selector($server_homes, $job['home_id']."_".$job['ip']."_".$job['port']);
+							get_server_selector($server_homes, $idStr, FALSE, TRUE);
+				}
 				else
 					$task = get_remote_server_selector($remote_servers, $remote_servers_offline, $remote_server_id).
 							'</td><td><input style="width: 100%; box-sizing: border-box;" type="text" name="command" value="'.str_replace("\"","&quot;",$job['command']).'" />';
