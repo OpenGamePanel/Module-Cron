@@ -95,16 +95,16 @@ function exec_ogp_module()
 			
 			switch ($_POST['action']) {
 				case "stop":
-					$command = "wget -N \"" . $panelURL . "/ogp_api.php?action=stopServer&homeid=" . $home_id . "&controlpass=" . $control_password . "\" --no-check-certificate > /dev/null 2>&1";
+					$command = "wget -qO- \"" . $panelURL . "/ogp_api.php?action=stopServer&homeid=" . $home_id . "&controlpass=" . $control_password . "\" --no-check-certificate > /dev/null 2>&1";
 					break;
 				case "start":
-					$command = "wget -N \"" . $panelURL . "/ogp_api.php?action=startServer&homeid=" . $home_id . "&controlpass=" . $control_password . "\" --no-check-certificate > /dev/null 2>&1";
+					$command = "wget -qO- \"" . $panelURL . "/ogp_api.php?action=startServer&homeid=" . $home_id . "&controlpass=" . $control_password . "\" --no-check-certificate > /dev/null 2>&1";
 					break;
 				case "restart":
-					$command = "wget -N \"" . $panelURL . "/ogp_api.php?action=restartServer&homeid=" . $home_id . "&controlpass=" . $control_password . "\" --no-check-certificate > /dev/null 2>&1";
+					$command = "wget -qO- \"" . $panelURL . "/ogp_api.php?action=restartServer&homeid=" . $home_id . "&controlpass=" . $control_password . "\" --no-check-certificate > /dev/null 2>&1";
 					break;
 				case "steam_auto_update":
-					$command = "wget -N \"" . $panelURL . "/ogp_api.php?action=autoUpdateSteamHome&homeid=" . $home_id . "&controlpass=" . $control_password . "\" --no-check-certificate > /dev/null 2>&1";
+					$command = "wget -qO- \"" . $panelURL . "/ogp_api.php?action=autoUpdateSteamHome&homeid=" . $home_id . "&controlpass=" . $control_password . "\" --no-check-certificate > /dev/null 2>&1";
 					break;
 			}
 		}
