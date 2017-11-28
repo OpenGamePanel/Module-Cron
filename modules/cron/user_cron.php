@@ -245,7 +245,7 @@ function exec_ogp_module()
 			{				
 				if(isset($job['action']))
 				{
-					if(hasValue($job['home_id']) && hasValue(@$job['ip']) && hasValue(@$job['port'])){
+					if(array_key_exists('home_id', $job) && array_key_exists('ip', $job) && array_key_exists('port', $job) && hasValue($job['home_id']) && hasValue($job['ip']) && hasValue($job['port'])){
 						$uniqueStr = $job['home_id']."_".$job['ip']."_".$job['port'];
 					}else if(hasValue($job['home_id'])){
 						$uniqueStr = $job['home_id'];
