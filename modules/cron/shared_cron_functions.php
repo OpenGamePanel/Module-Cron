@@ -166,6 +166,11 @@ function updateCronJobPasswords($db, $remote, $changedHomeId){
 						if($homeId !== false && $action !== false){
 							if($homeId == $changedHomeId){
 								$curPass = getURLParam($cPassStr, $command);
+								if(stripos($curPass, '" --no-check-certificate') !== false){
+									$curPass = substr($curPass, 0, stripos($curPass, '" --no-check-certificate'));
+								}else if(strrpos($curPass, '"') !== false){
+									$curPass = substr($curPass, 0, strrpos($curPass, '"'));
+								}								
 								if($curPass != $control_password){
 									$command = str_replace($cPassStr . $curPass, $cPassStr . $control_password, $command);
 									$minute = $job['minute'];
