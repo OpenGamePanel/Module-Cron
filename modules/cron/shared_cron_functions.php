@@ -160,8 +160,7 @@ function updateCronJobPasswords($db, $remote, $changedHomeId){
 				if($home['remote_server_id'] == $remote_server_id){
 					foreach($jobs as $jobId => $job)
 					{
-						$parts = explode(" ", $job);
-						$command = $parts[5];
+						$command = $job['command'];
 						$homeId = getURLParam($homeIdStr, $command);
 						$action = getURLParam($actionStr, $command);
 						if($homeId !== false && $action !== false){
@@ -169,11 +168,11 @@ function updateCronJobPasswords($db, $remote, $changedHomeId){
 								$curPass = getURLParam($cPassStr, $command);
 								if($curPass != $control_password){
 									$command = str_replace($cPassStr . $curPass, $cPassStr . $control_password, $command);
-									$minute = $parts[0];
-									$hour = $parts[1];
-									$dayOfTheMonth = $parts[2];
-									$month = $parts[3];
-									$dayOfTheWeek = $parts[4];
+									$minute = $job['minute'];
+									$hour = $job['hour'];
+									$dayOfTheMonth = $job['dayOfTheMonth'];
+									$month = $job['month'];
+									$dayOfTheWeek = $job['dayOfTheWeek'];
 									
 									$job = $minute." ".
 										$hour ." ".
