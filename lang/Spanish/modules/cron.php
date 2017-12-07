@@ -22,26 +22,26 @@
  *
  */
 
-define('minute', "Minuto");
-define('hour', "Hora");
-define('day', "Día");
-define('month', "Mes");
-define('day_of_the_week', "D/Semana");
-define('action', "Acción");
-define('steam_auto_update', "Steam Auto-Update");
-define('stop', "Parar");
-define('start', "Iniciar");
-define('restart', "Reiniciar");
-define('command', "Comando");
-define('add', "Añadir");
-define('remove', "Eliminar");
-define('now', "Ahora");
-define('schedule_new_job', "Programar una tarea nueva");
-define('scheduled_jobs', "Tareas programadas");
-define('there_are_no_scheduled_jobs', "No hay tareas programadas");
-define('cron_events', "Eventos de Cron");
-define('refresh_interval', "Intervalo de refresco");
-define('cron_no_servers_tied_to_account', "No hay servidores de juego directamente asignados a su cuenta.");
-define('cron_admin_link_display_text', "Administración de Cron (todos los servidores)");
-define('cron_admin_no_ogp_servers_to_display', "No hay ningún servidor de juego actualmente configurado en OGP.");
+define('OGP_LANG_minute', "Minuto");
+define('OGP_LANG_hour', "Hora");
+define('OGP_LANG_day', "Día");
+define('OGP_LANG_month', "Mes");
+define('OGP_LANG_day_of_the_week', "D/Semana");
+define('OGP_LANG_action', "Acción");
+define('OGP_LANG_steam_auto_update', "Steam Auto-Update");
+define('OGP_LANG_stop', "Parar");
+define('OGP_LANG_start', "Iniciar");
+define('OGP_LANG_restart', "Reiniciar");
+define('OGP_LANG_command', "Comando");
+define('OGP_LANG_add', "Añadir");
+define('OGP_LANG_remove', "Eliminar");
+define('OGP_LANG_now', "Ahora");
+define('OGP_LANG_schedule_new_job', "Programar una tarea nueva");
+define('OGP_LANG_scheduled_jobs', "Tareas programadas");
+define('OGP_LANG_there_are_no_scheduled_jobs', "No hay tareas programadas");
+define('OGP_LANG_cron_events', "Eventos de Cron");
+define('OGP_LANG_refresh_interval', "Intervalo de refresco");
+define('OGP_LANG_cron_no_servers_tied_to_account', "No hay servidores de juego directamente asignados a su cuenta.");
+define('OGP_LANG_cron_admin_link_display_text', "Administración de Cron (todos los servidores)");
+define('OGP_LANG_cron_admin_no_ogp_servers_to_display', "No hay ningún servidor de juego actualmente configurado en OGP.");
 ?>
