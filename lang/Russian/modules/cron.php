@@ -22,26 +22,26 @@
  *
  */
 
-define('minute', "Минуты");
-define('hour', "Часы");
-define('day', "Дни");
-define('month', "Месяц");
-define('day_of_the_week', "Неделя");
-define('action', "Действие");
-define('steam_auto_update', "Автообновление Steam");
-define('stop', "Стоп");
-define('start', "Запуск");
-define('restart', "Перезапустить");
-define('command', "RCON&nbsp;команда");
-define('add', "Добавить");
-define('remove', "Удалить");
-define('now', "Сейчас");
-define('schedule_new_job', "Запланировать новое задание");
-define('scheduled_jobs', "Запланированные задания");
-define('there_are_no_scheduled_jobs', "Запланированных заданий нет");
-define('cron_events', "События задания");
-define('refresh_interval', "Интервал обновления консоли");
-define('cron_no_servers_tied_to_account', "Для вашей учетной записи не назначен ни один игровой сервер.");
-define('cron_admin_link_display_text', "Администрирование Планировщика (все сервера)");
-define('cron_admin_no_ogp_servers_to_display', "Нет ни одного игрового сервер в конфигурации OGP.");
+define('OGP_LANG_minute', "Минуты");
+define('OGP_LANG_hour', "Часы");
+define('OGP_LANG_day', "Дни");
+define('OGP_LANG_month', "Месяц");
+define('OGP_LANG_day_of_the_week', "Неделя");
+define('OGP_LANG_action', "Действие");
+define('OGP_LANG_steam_auto_update', "Автообновление Steam");
+define('OGP_LANG_stop', "Стоп");
+define('OGP_LANG_start', "Запуск");
+define('OGP_LANG_restart', "Перезапустить");
+define('OGP_LANG_command', "RCON&nbsp;команда");
+define('OGP_LANG_add', "Добавить");
+define('OGP_LANG_remove', "Удалить");
+define('OGP_LANG_now', "Сейчас");
+define('OGP_LANG_schedule_new_job', "Запланировать новое задание");
+define('OGP_LANG_scheduled_jobs', "Запланированные задания");
+define('OGP_LANG_there_are_no_scheduled_jobs', "Запланированных заданий нет");
+define('OGP_LANG_cron_events', "События задания");
+define('OGP_LANG_refresh_interval', "Интервал обновления консоли");
+define('OGP_LANG_cron_no_servers_tied_to_account', "Для вашей учетной записи не назначен ни один игровой сервер.");
+define('OGP_LANG_cron_admin_link_display_text', "Администрирование Планировщика (все сервера)");
+define('OGP_LANG_cron_admin_no_ogp_servers_to_display', "Нет ни одного игрового сервер в конфигурации OGP.");
 ?>
