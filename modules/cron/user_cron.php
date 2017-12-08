@@ -143,13 +143,13 @@ function exec_ogp_module()
 		list($jobsArray, $remote_servers_offline) = reloadJobs($server_homes, $remote_servers);
 	}	
 
-	echo "<h2>" . schedule_new_job . "</h2>";
+	echo "<h2>" . get_lang("schedule_new_job") . "</h2>";
 	require_once("includes/refreshed.php");
 	$refresh = new refreshed();
 	$homeid_ip_port = isset($_POST['homeid_ip_port']) ? $_POST['homeid_ip_port'] : key($server_homes);
 	$r_server_id = $server_homes[$homeid_ip_port]['remote_server_id'];
 	$curtime = $refresh->add( "home.php?m=cron&p=thetime&r_server_id=$r_server_id&type=cleared" );
-	echo "<pre class='log' ><table><tr><td>" . now . 
+	echo "<pre class='log' ><table><tr><td>" . get_lang("now") . 
 		"&nbsp;</td><td><form action='' method='POST' >" . get_server_selector($server_homes, $homeid_ip_port, TRUE) . 
 		"</form></td></tr></table> <b style='font-size:1.4em;'>" . $refresh->getdiv($curtime) . "</b></pre>";
  ?>
@@ -157,25 +157,25 @@ function exec_ogp_module()
 <table class="center hundred">
 	<tr>
 		<th>
-		<?php echo minute; ?>
+		<?php echo get_lang("minute"); ?>
 		</th>
 		<th>
-		<?php echo hour; ?>
+		<?php echo get_lang("hour"); ?>
 		</th>
 		<th>
-		<?php echo day; ?>
+		<?php echo get_lang("day"); ?>
 		</th>
 		<th>
-		<?php echo month; ?>
+		<?php echo get_lang("month"); ?>
 		</th>
 		<th>
-		<?php echo day_of_the_week; ?>
+		<?php echo get_lang("day_of_the_week"); ?>
 		</th>
 		<th>
-		<?php echo action; ?>
+		<?php echo get_lang("action"); ?>
 		</th>
 		<th>
-		<?php echo user_games; ?>
+		<?php echo get_lang("user_games"); ?>
 		</th>
 	</tr>
 	<tr>
@@ -207,7 +207,7 @@ function exec_ogp_module()
 </table>
 </form>
 <br>
-<h2><?php echo scheduled_jobs;?></h2>
+<h2><?php echo get_lang("scheduled_jobs");?></h2>
 <?php
 	if ( !empty($jobsArray) )
 	{
@@ -216,25 +216,25 @@ function exec_ogp_module()
 	</tr>
 	<tr>
 		<th>
-		<?php echo minute; ?>
+		<?php echo get_lang("minute"); ?>
 		</th>
 		<th>
-		<?php echo hour; ?>
+		<?php echo get_lang("hour"); ?>
 		</th>
 		<th>
-		<?php echo day; ?>
+		<?php echo get_lang("day"); ?>
 		</th>
 		<th>
-		<?php echo month; ?>
+		<?php echo get_lang("month"); ?>
 		</th>
 		<th>
-		<?php echo day_of_the_week; ?>
+		<?php echo get_lang("day_of_the_week"); ?>
 		</th>
 		<th>
-		<?php echo action; ?>
+		<?php echo get_lang("action"); ?>
 		</th>
 		<th>
-		<?php echo user_games; ?>
+		<?php echo get_lang("user_games"); ?>
 		</th>
 	</tr>
 <?php
@@ -276,8 +276,8 @@ function exec_ogp_module()
 										<td style="width: 132px;">
 											<input type="hidden" name="job_id" value=\''.$jobId.'\' />
 											<input type="hidden" name="r_server_id" value=\''.$remote_server_id.'\' />
-											<input style="" type="submit" name="editJob" value="'. edit .'" />
-											<input style="" type="submit" name="removeJob" value="'. remove .'" />
+											<input style="" type="submit" name="editJob" value="'. get_lang("edit") .'" />
+											<input style="" type="submit" name="removeJob" value="'. get_lang("remove") .'" />
 											</form>
 										</td>
 									</tr>';
@@ -291,7 +291,7 @@ function exec_ogp_module()
 <?php
 	}
 	else
-		echo "<h3>". there_are_no_scheduled_jobs ."</h3>";
+		echo "<h3>". get_lang("there_are_no_scheduled_jobs") ."</h3>";
 ?>
 <table class='center hundred' ><tr><td><a href='javascript:history.go(-1)' > << <?php echo back ?></a><?php if(!$boolShowedAdminLink && $isAdmin){ echo '&nbsp; &nbsp; | &nbsp; &nbsp; ' . '<a href="home.php?m=cron&p=cron">' . get_lang('cron_admin_link_display_text') . '</a>'; }?></td></tr></table>
 <script type="text/javascript">

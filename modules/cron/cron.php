@@ -161,7 +161,7 @@ function exec_ogp_module()
 	$r_server_id = $homeid_ip_port == 0 ? $_POST['r_server_id'] : $server_homes[$homeid_ip_port]['remote_server_id'];
 	$homeid_ip_port = $homeid_ip_port == 0 ? key($server_homes) : $homeid_ip_port;
 	$curtime = $refresh->add( "home.php?m=cron&p=thetime&r_server_id=$r_server_id&type=cleared" );
-	echo "<pre class='log' ><table><tr><td>" . now . 
+	echo "<pre class='log' ><table><tr><td>" . get_lang("now") . 
 		 "&nbsp;</td><td><form action='' method='POST' >" . get_server_selector($server_homes, $homeid_ip_port, TRUE, true) . 
 		 "</form></td><td><form action='' method='POST' >" .
 		 get_remote_server_selector($remote_servers, $remote_servers_offline, $r_server_id, TRUE) .
@@ -170,25 +170,25 @@ function exec_ogp_module()
 <table class="center hundred">
 	<tr>
 		<th>
-		<?php echo minute; ?>
+		<?php echo get_lang("minute"); ?>
 		</th>
 		<th>
-		<?php echo hour; ?>
+		<?php echo get_lang("hour"); ?>
 		</th>
 		<th>
-		<?php echo day; ?>
+		<?php echo get_lang("day"); ?>
 		</th>
 		<th>
-		<?php echo month; ?>
+		<?php echo get_lang("month"); ?>
 		</th>
 		<th>
-		<?php echo day_of_the_week; ?>
+		<?php echo get_lang("day_of_the_week"); ?>
 		</th>
 		<th>
-		<?php echo action; ?>
+		<?php echo get_lang("action"); ?>
 		</th>
 		<th>
-		<?php echo user_games; ?>
+		<?php echo get_lang("user_games"); ?>
 		</th>
 	</tr>
 	<tr>
@@ -221,25 +221,25 @@ function exec_ogp_module()
 	</tr>
 	<tr>
 		<th>
-		<?php echo minute; ?>
+		<?php echo get_lang("minute"); ?>
 		</th>
 		<th>
-		<?php echo hour; ?>
+		<?php echo get_lang("hour"); ?>
 		</th>
 		<th>
-		<?php echo day; ?>
+		<?php echo get_lang("day"); ?>
 		</th>
 		<th>
-		<?php echo month; ?>
+		<?php echo get_lang("month"); ?>
 		</th>
 		<th>
-		<?php echo day_of_the_week; ?>
+		<?php echo get_lang("day_of_the_week"); ?>
 		</th>
 		<th>
-		<?php echo server; ?>
+		<?php echo get_lang("server"); ?>
 		</th>
 		<th>
-		<?php echo command; ?>
+		<?php echo get_lang("command"); ?>
 		</th>
 	</tr>
 	<tr>
@@ -272,7 +272,7 @@ function exec_ogp_module()
 	</tr>
 </table>
 <br>
-<h2><?php echo scheduled_jobs;?></h2>
+<h2><?php echo get_lang("scheduled_jobs");?></h2>
 <?php
 	if ( !empty($remote_servers_offline) )
 	{
@@ -299,25 +299,25 @@ function exec_ogp_module()
 	</tr>
 	<tr>
 		<th>
-		<?php echo minute; ?>
+		<?php echo get_lang("minute"); ?>
 		</th>
 		<th>
-		<?php echo hour; ?>
+		<?php echo get_lang("hour"); ?>
 		</th>
 		<th>
-		<?php echo day; ?>
+		<?php echo get_lang("day"); ?>
 		</th>
 		<th>
-		<?php echo month; ?>
+		<?php echo get_lang("month"); ?>
 		</th>
 		<th>
-		<?php echo day_of_the_week; ?>
+		<?php echo get_lang("day_of_the_week"); ?>
 		</th>
 		<th>
-		<?php echo action . " / " . server; ?>
+		<?php echo get_lang("action") . " / " . get_lang("server"); ?>
 		</th>
 		<th>
-		<?php echo user_games . " / " . command; ?>
+		<?php echo get_lang("user_games") . " / " . get_lang("command"); ?>
 		</th>
 	</tr>
 <?php
@@ -365,8 +365,8 @@ function exec_ogp_module()
 									<td style="width: 132px;">
 										<input type="hidden" name="job_id" value=\''.$jobId.'\' />
 										<input type="hidden" name="r_server_id" value=\''.$remote_server_id.'\' />
-										<input style="" type="submit" name="editJob" value="'. edit .'" />
-										<input style="" type="submit" name="removeJob" value="'. remove .'" />
+										<input style="" type="submit" name="editJob" value="'. get_lang("edit") .'" />
+										<input style="" type="submit" name="removeJob" value="'. get_lang("remove") .'" />
 										</form>
 									</td>
 								</tr>';
@@ -379,7 +379,7 @@ function exec_ogp_module()
 	}
 	else
 	{
-		echo "<h3>". there_are_no_scheduled_jobs ."</h3>";
+		echo "<h3>". get_lang("there_are_no_scheduled_jobs") ."</h3>";
 	}
 ?>
 <table class='center hundred' ><tr><td><a href='javascript:history.go(-1)' > << <?php echo back ?></a></td></tr></table>

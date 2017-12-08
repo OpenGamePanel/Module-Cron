@@ -43,6 +43,6 @@ function exec_ogp_module()
 			 '</td></tr></table>';
 	}
 	else
-		echo agent_offline;
+		echo get_lang("agent_offline");
 }
 ?>
