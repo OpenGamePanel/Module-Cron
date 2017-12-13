@@ -249,4 +249,20 @@ function get_remote_server_selector($r_servers, $remote_servers_offline, $remote
 	}
 	return $select_rserver .= "</select>\n";
 }
+
+function checkCronInput($min, $hour, $day, $month, $dayOfWeek) {
+    $blacklist = '"#$%^&()+=[]\';{}|:<>?~';
+    $returns = array();
+    
+    $args = func_get_args();
+    
+    foreach ($args as $k => $arg) {
+        if (empty($arg) || strpbrk($arg, $blacklist)) {
+            $returns[$k] = false;
+        }
+    }
+    
+    return (empty($returns) ? true : false);
+}
+
 ?>

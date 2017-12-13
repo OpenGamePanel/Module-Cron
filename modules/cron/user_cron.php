@@ -30,7 +30,7 @@ require_once('modules/cron/shared_cron_functions.php');
 
 function exec_ogp_module() 
 {
-	global $db;
+	global $db, $view;
 	$isAdmin = $db->isAdmin($_SESSION['user_id']);
 	$boolShowedAdminLink = false;
 
@@ -119,6 +119,14 @@ function exec_ogp_module()
 					$command = "wget -qO- \"" . $panelURL . "/ogp_api.php?action=autoUpdateSteamHome&homeid=" . $home_id . "&controlpass=" . $control_password . "\" --no-check-certificate > /dev/null 2>&1";
 					break;
 			}
+
+			if (!checkCronInput($_POST['minute'], $_POST['hour'], $_POST['dayOfTheMonth'], $_POST['month'], $_POST['dayOfTheWeek'])) {
+				print_failure(get_lang('OGP_LANG_bad_inputs'));
+				$view->refresh('?m=cron&p=user_cron');
+
+				return;
+			}
+
 			$job = $_POST['minute']." ".
 				   $_POST['hour']." ".
 				   $_POST['dayOfTheMonth']." ".
