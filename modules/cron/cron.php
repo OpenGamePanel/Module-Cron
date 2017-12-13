@@ -30,7 +30,7 @@ require_once('modules/cron/shared_cron_functions.php');
 
 function exec_ogp_module() 
 {
-	global $db;
+	global $db, $view;
 	$r_servers = $db->getRemoteServers();
 	$homes = $db->getIpPorts();
 	if(!$homes)
@@ -116,6 +116,13 @@ function exec_ogp_module()
 											$remote_servers[$r_server_id]['encryption_key'],
 											$remote_servers[$r_server_id]['timeout']);
 			$command = strip_real_escape_string($_POST['command']);
+		}
+
+		if (!checkCronInput($_POST['minute'], $_POST['hour'], $_POST['dayOfTheMonth'], $_POST['month'], $_POST['dayOfTheWeek'])) {
+			print_failure(get_lang('OGP_LANG_bad_inputs'));
+			$view->refresh('?m=cron&p=cron');
+
+			return;
 		}
 		
 		$job = $_POST['minute']." ".
