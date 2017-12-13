@@ -2,7 +2,7 @@
 /*
  *
  * OGP - Open Game Panel
- * Copyright (C) Copyright (C) 2008 - 2012 The OGP Development Team
+ * Copyright (C) 2008 - 2017 The OGP Development Team
  *
  * http://www.opengamepanel.org/
  *
@@ -43,6 +43,6 @@ function exec_ogp_module()
 			 '</td></tr></table>';
 	}
 	else
-		echo agent_offline;
+		echo get_lang("agent_offline");
 }
 ?>

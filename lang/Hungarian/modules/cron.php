@@ -2,7 +2,7 @@
 /*
  *
  * OGP - Open Game Panel
- * Copyright (C) 2008 - 2016 The OGP Development Team
+ * Copyright (C) 2008 - 2017 The OGP Development Team
  *
  * http://www.opengamepanel.org/
  *
@@ -22,22 +22,26 @@
  *
  */
 
-define('minute', "Perc");
-define('hour', "Óra");
-define('day', "Nap");
-define('month', "Hónap");
-define('day_of_the_week', "N/Hét");
-define('action', "Művelet");
-define('stop', "Leállítás");
-define('start', "Elindítás");
-define('restart', "Újraindítás");
-define('command', "Parancs");
-define('add', "Hozzáadás");
-define('remove', "Eltávolítás");
-define('now', "Most");
-define('schedule_new_job', "Új feladat ütemezése");
-define('scheduled_jobs', "Ütemezett feladatok");
-define('there_are_no_scheduled_jobs', "Nincsenek ütemezett feladatok");
-define('cron_events', "Cron események");
-define('refresh_interval', "Frissítési intervallum");
+define('OGP_LANG_minute', "Perc");
+define('OGP_LANG_hour', "Óra");
+define('OGP_LANG_day', "Nap");
+define('OGP_LANG_month', "Hónap");
+define('OGP_LANG_day_of_the_week', "N/Hét");
+define('OGP_LANG_action', "Művelet");
+define('OGP_LANG_steam_auto_update', "Steam automatikus frissítés");
+define('OGP_LANG_stop', "Leállítás");
+define('OGP_LANG_start', "Elindítás");
+define('OGP_LANG_restart', "Újraindítás");
+define('OGP_LANG_command', "Parancs");
+define('OGP_LANG_add', "Hozzáadás");
+define('OGP_LANG_remove', "Eltávolítás");
+define('OGP_LANG_now', "Most");
+define('OGP_LANG_schedule_new_job', "Új feladat ütemezése");
+define('OGP_LANG_scheduled_jobs', "Ütemezett feladatok");
+define('OGP_LANG_there_are_no_scheduled_jobs', "Nincsenek ütemezett feladatok");
+define('OGP_LANG_cron_events', "Cron események");
+define('OGP_LANG_refresh_interval', "Frissítési intervallum");
+define('OGP_LANG_cron_no_servers_tied_to_account', "Nincsenek játékszerverek közvetlenül hozzárendelve a fiókodhoz.");
+define('OGP_LANG_cron_admin_link_display_text', "Cron adminisztráció (minden szerver)");
+define('OGP_LANG_cron_admin_no_ogp_servers_to_display', "Jelenleg nincsenek játékszerverek beállítva az OGP-ben.");
 ?>

@@ -3,7 +3,7 @@
 /*
  *
  * OGP - Open Game Panel
- * Copyright (C) Copyright (C) 2008 - 2012 The OGP Development Team
+ * Copyright (C) 2008 - 2017 The OGP Development Team
  *
  * http://www.opengamepanel.org/
  *
@@ -22,6 +22,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  */
+
 error_reporting(E_ALL);
 
 function exec_ogp_module() 
@@ -36,7 +37,7 @@ function exec_ogp_module()
 		$remote = new OGPRemoteLibrary($remote_server['agent_ip'], $remote_server['agent_port'], $remote_server['encryption_key'], $remote_server['timeout'] );
 		if($remote->status_chk() != 1)
 		{
-			print_failure(agent_offline);
+			print_failure(get_lang("agent_offline"));
 			return;
 		}
 		$remote->remote_readfile('scheduler.log', $events);
