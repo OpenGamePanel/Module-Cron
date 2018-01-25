@@ -226,7 +226,7 @@ function get_server_selector($server_homes, $homeid_ip_port = FALSE, $onchange =
 			$selected = ($homeid_ip_port and ($homeid_ip_port == $server_home['home_id']."_".$server_home['ip']."_".$server_home['port'] || trim($homeid_ip_port) == trim($server_home['home_id']))) ? 'selected="selected"' : '';
 			$select_game .= "<option value='". $server_home['home_id'] . "_" . $server_home['ip'] .
 							"_" . $server_home['port'] . "' $selected " . $additionalMarkup . ">" . $server_home['home_name'] . 
-							" - " . checkDisplayPublicIP($server_home['display_public_ip'],$server_home['ip']) . ":" .$server_home['port'];
+							" - " . checkDisplayPublicIP($server_home['display_public_ip'],$server_home['ip'] != $server_home['agent_ip'] ? $server_home['ip'] : $server_home['agent_ip']) . ":" .$server_home['port'];
 			if($includeRemoteName){
 				$select_game .= " ( " . $server_home['remote_server_name'] . " )";
 			}
