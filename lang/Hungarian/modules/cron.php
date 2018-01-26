@@ -44,4 +44,5 @@ define('OGP_LANG_refresh_interval', "Frissítési intervallum");
 define('OGP_LANG_cron_no_servers_tied_to_account', "Nincsenek játékszerverek közvetlenül hozzárendelve a fiókodhoz.");
 define('OGP_LANG_cron_admin_link_display_text', "Cron adminisztráció (minden szerver)");
 define('OGP_LANG_cron_admin_no_ogp_servers_to_display', "Jelenleg nincsenek játékszerverek beállítva az OGP-ben.");
+define('OGP_LANG_bad_inputs', "Scheduled time contains invalid characters.");
 ?>

@@ -44,4 +44,5 @@ define('OGP_LANG_refresh_interval', "Intervalo de atualização");
 define('OGP_LANG_cron_no_servers_tied_to_account', "Não há servidores de jogos diretamente atribuídos à sua conta.");
 define('OGP_LANG_cron_admin_link_display_text', "Administração de Cron (todos os servers)");
 define('OGP_LANG_cron_admin_no_ogp_servers_to_display', "Não há nenhum servidor de jogos atualmente configurado no painel.");
+define('OGP_LANG_bad_inputs', "Scheduled time contains invalid characters.");
 ?>

@@ -44,4 +44,5 @@ define('OGP_LANG_refresh_interval', "Интервал обновления ко�
 define('OGP_LANG_cron_no_servers_tied_to_account', "Для вашей учетной записи не назначен ни один игровой сервер.");
 define('OGP_LANG_cron_admin_link_display_text', "Администрирование Планировщика (все сервера)");
 define('OGP_LANG_cron_admin_no_ogp_servers_to_display', "Нет ни одного игрового сервер в конфигурации OGP.");
+define('OGP_LANG_bad_inputs', "Scheduled time contains invalid characters.");
 ?>

@@ -28,7 +28,7 @@ define('OGP_LANG_day', "Día");
 define('OGP_LANG_month', "Mes");
 define('OGP_LANG_day_of_the_week', "D/Semana");
 define('OGP_LANG_action', "Acción");
-define('OGP_LANG_steam_auto_update', "Steam Auto-Update");
+define('OGP_LANG_steam_auto_update', "Steam Auto Update");
 define('OGP_LANG_stop', "Parar");
 define('OGP_LANG_start', "Iniciar");
 define('OGP_LANG_restart', "Reiniciar");
@@ -44,4 +44,5 @@ define('OGP_LANG_refresh_interval', "Intervalo de refresco");
 define('OGP_LANG_cron_no_servers_tied_to_account', "No hay servidores de juego directamente asignados a su cuenta.");
 define('OGP_LANG_cron_admin_link_display_text', "Administración de Cron (todos los servidores)");
 define('OGP_LANG_cron_admin_no_ogp_servers_to_display', "No hay ningún servidor de juego actualmente configurado en OGP.");
+define('OGP_LANG_bad_inputs', "Scheduled time contains invalid characters.");
 ?>

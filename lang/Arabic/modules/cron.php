@@ -44,4 +44,5 @@ define('OGP_LANG_refresh_interval', "الفاصل الزمني للتحديث");
 define('OGP_LANG_cron_no_servers_tied_to_account', "لا توجد خوادم لعبة تعيين مباشرة إلى حسابك.");
 define('OGP_LANG_cron_admin_link_display_text', "إدارة كرون (جميع الخوادم)");
 define('OGP_LANG_cron_admin_no_ogp_servers_to_display', "ليست هناك أي ملقمات اللعبة التي تم تكوينها حاليا في أوبن قيم بانل");
+define('OGP_LANG_bad_inputs', "يحتوي الوقت المقرر على أحرف غير صالحة.");
 ?>

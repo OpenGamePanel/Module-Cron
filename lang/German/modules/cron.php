@@ -44,4 +44,5 @@ define('OGP_LANG_refresh_interval', "Aktualisierungsinterval");
 define('OGP_LANG_cron_no_servers_tied_to_account', "Ihrem Konto sind keine Spieleserver direkt zugeordnet.");
 define('OGP_LANG_cron_admin_link_display_text', "Cron Administration (Alle Server)");
 define('OGP_LANG_cron_admin_no_ogp_servers_to_display', "Derzeit sind keine Spieleserver in OGP konfiguriert.");
+define('OGP_LANG_bad_inputs', "Geplante Zeit enthält ungültige Zeichen.");
 ?>
