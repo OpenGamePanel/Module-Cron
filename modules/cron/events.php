@@ -37,7 +37,7 @@ function exec_ogp_module()
 		$remote = new OGPRemoteLibrary($remote_server['agent_ip'], $remote_server['agent_port'], $remote_server['encryption_key'], $remote_server['timeout'] );
 		if($remote->status_chk() != 1)
 		{
-			print_failure(agent_offline);
+			print_failure(get_lang("agent_offline"));
 			return;
 		}
 		$remote->remote_readfile('scheduler.log', $events);

@@ -2,7 +2,7 @@
 /*
  *
  * OGP - Open Game Panel
- * Copyright (C) 2008 - 2016 The OGP Development Team
+ * Copyright (C) 2008 - 2017 The OGP Development Team
  *
  * http://www.opengamepanel.org/
  *
@@ -22,23 +22,27 @@
  *
  */
 
-define('minute', "Minute");
-define('hour', "Hour");
-define('day', "Day");
-define('month', "Month");
-define('day_of_the_week', "D/Week");
-define('action', "Action");
-define('steam_auto_update', "Steam Auto Update");
-define('stop', "Stop");
-define('start', "Запуск");
-define('restart', "Restart");
-define('command', "RCON&nbsp;команда");
-define('add', "Add");
-define('remove', "Remove");
-define('now', "Now");
-define('schedule_new_job', "Schedule a new job");
-define('scheduled_jobs', "Scheduled jobs");
-define('there_are_no_scheduled_jobs', "There are no scheduled jobs");
-define('cron_events', "Cron Events");
-define('refresh_interval', "Интервал обновления консоли");
+define('OGP_LANG_minute', "Минуты");
+define('OGP_LANG_hour', "Часы");
+define('OGP_LANG_day', "Дни");
+define('OGP_LANG_month', "Месяц");
+define('OGP_LANG_day_of_the_week', "Неделя");
+define('OGP_LANG_action', "Действие");
+define('OGP_LANG_steam_auto_update', "Автообновление Steam");
+define('OGP_LANG_stop', "Стоп");
+define('OGP_LANG_start', "Запуск");
+define('OGP_LANG_restart', "Перезапустить");
+define('OGP_LANG_command', "RCON&nbsp;команда");
+define('OGP_LANG_add', "Добавить");
+define('OGP_LANG_remove', "Удалить");
+define('OGP_LANG_now', "Сейчас");
+define('OGP_LANG_schedule_new_job', "Запланировать новое задание");
+define('OGP_LANG_scheduled_jobs', "Запланированные задания");
+define('OGP_LANG_there_are_no_scheduled_jobs', "Запланированных заданий нет");
+define('OGP_LANG_cron_events', "События задания");
+define('OGP_LANG_refresh_interval', "Интервал обновления консоли");
+define('OGP_LANG_cron_no_servers_tied_to_account', "Для вашей учетной записи не назначен ни один игровой сервер.");
+define('OGP_LANG_cron_admin_link_display_text', "Администрирование Планировщика (все сервера)");
+define('OGP_LANG_cron_admin_no_ogp_servers_to_display', "Нет ни одного игрового сервер в конфигурации OGP.");
+define('OGP_LANG_bad_inputs', "Поле запланированного времени содержит недопустимые символы.");
 ?>
