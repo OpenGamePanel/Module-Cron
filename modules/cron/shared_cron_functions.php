@@ -265,4 +265,24 @@ function checkCronInput($min, $hour, $day, $month, $dayOfWeek) {
     return (empty($returns) ? true : false);
 }
 
+function checkJobs($jobsArray, $db) {
+	$return = array();
+	foreach ($jobsArray as $remote_server_id => $jobs) {
+		foreach ($jobs as $jobId => $job) {
+			if (!isset($job['action'])) continue;
+			$hasAccess = ($db->isAdmin($_SESSION['user_id'])) ? $db->getGameHome($job['home_id']) : $db->getUserGameHome($_SESSION['user_id'], $job['home_id']);
+			if (!$hasAccess) continue;
+			if (array_key_exists('home_id', $job) && array_key_exists('ip', $job) && array_key_exists('port', $job) && hasValue($job['home_id']) && hasValue($job['ip']) && hasValue($job['port'])) {
+				$job['uniqueStr'] = $job['home_id']."_".$job['ip']."_".$job['port'];
+			} elseif(hasValue($job['home_id'])) {
+				$job['uniqueStr'] = $job['home_id'];
+			}
+			$job['job_id'] = $jobId;
+			$job['r_server_id'] = $remote_server_id;
+			$return[] = $job;
+		}
+	}
+	return $return;
+}
+
 ?>
