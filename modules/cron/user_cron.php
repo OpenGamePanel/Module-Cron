@@ -217,8 +217,10 @@ function exec_ogp_module()
 <br>
 <h2><?php echo get_lang("scheduled_jobs");?></h2>
 <?php
-	if ( !empty($jobsArray) )
-	{
+
+	$jobsArray = checkJobs($jobsArray, $db);
+
+	if (!empty($jobsArray)) {
 ?>
 <table class="center hundred">
 	</tr>
@@ -247,52 +249,43 @@ function exec_ogp_module()
 	</tr>
 <?php
 		$user_jobs = "";
-		foreach( $jobsArray as $remote_server_id => $jobs )
+
+		foreach($jobsArray as $job)
 		{
-			foreach($jobs as $jobId => $job)
-			{				
-				if(isset($job['action']))
-				{
-					if(array_key_exists('home_id', $job) && array_key_exists('ip', $job) && array_key_exists('port', $job) && hasValue($job['home_id']) && hasValue($job['ip']) && hasValue($job['port'])){
-						$uniqueStr = $job['home_id']."_".$job['ip']."_".$job['port'];
-					}else if(hasValue($job['home_id'])){
-						$uniqueStr = $job['home_id'];
-					}
-					
-					if(hasValue(@$uniqueStr)){
-						$user_jobs .=  '<tr>
-										<td style="width: 35px;" >
-											<form method="POST" >
-											<input style="width: 30px;" type="text" name="minute" value="'.$job['minute'].'" />
-										</td>
-										<td style="width: 35px;" >
-											<input style="width: 30px;" type="text" name="hour" value="'.$job['hour'].'" />
-										</td>
-										<td style="width: 35px;" >
-											<input style="width: 30px;" type="text" name="dayOfTheMonth" value="'.$job['dayOfTheMonth'].'" />
-										</td>
-										<td style="width: 35px;" >
-											<input style="width: 30px;" type="text" name="month" value="'.$job['month'].'" />
-										</td>
-										<td style="width: 35px;" >
-											<input style="width: 30px;" type="text" name="dayOfTheWeek" value="'.$job['dayOfTheWeek'].'" />
-										</td>
-										<td>
-											'.get_action_selector($job['action'])."</td><td>".
-											  get_server_selector($server_homes, $uniqueStr).'
-										</td>
-										<td style="width: 132px;">
-											<input type="hidden" name="job_id" value=\''.$jobId.'\' />
-											<input type="hidden" name="r_server_id" value=\''.$remote_server_id.'\' />
-											<input style="" type="submit" name="editJob" value="'. get_lang("edit") .'" />
-											<input style="" type="submit" name="removeJob" value="'. get_lang("remove") .'" />
-											</form>
-										</td>
-									</tr>';
-					}
-				}
+			if(hasValue($job['uniqueStr'])) {
+			 
+			 $user_jobs .=  '<tr>
+								<td style="width: 35px;" >
+									<form method="POST" >
+										<input style="width: 30px;" type="text" name="minute" value="'.$job['minute'].'" />
+								</td>
+								<td style="width: 35px;" >
+									<input style="width: 30px;" type="text" name="hour" value="'.$job['hour'].'" />
+								</td>
+								<td style="width: 35px;" >
+									<input style="width: 30px;" type="text" name="dayOfTheMonth" value="'.$job['dayOfTheMonth'].'" />
+								</td>
+								<td style="width: 35px;" >
+									<input style="width: 30px;" type="text" name="month" value="'.$job['month'].'" />
+								</td>
+								<td style="width: 35px;" >
+									<input style="width: 30px;" type="text" name="dayOfTheWeek" value="'.$job['dayOfTheWeek'].'" />
+								</td>
+								<td>
+									'.get_action_selector($job['action'])."</td><td>".
+									  get_server_selector($server_homes, $job['uniqueStr']).'
+								</td>
+								<td style="width: 132px;">
+									<input type="hidden" name="job_id" value=\''.$job['job_id'].'\' />
+									<input type="hidden" name="r_server_id" value=\''.$job['r_server_id'].'\' />
+									<input style="" type="submit" name="editJob" value="'. get_lang("edit") .'" />
+									<input style="" type="submit" name="removeJob" value="'. get_lang("remove") .'" />
+									</form>
+								</td>
+							</tr>';
 			}
 		}
+
 		echo $user_jobs;
 ?>
 </table>
