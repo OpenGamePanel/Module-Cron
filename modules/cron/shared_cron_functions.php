@@ -21,8 +21,9 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  */
-function reloadJobs($server_homes, $remote_servers)
+function reloadJobs($server_homes, $remote_servers, $getAllJobs = true)
 {
+	global $db;
 	$remote_servers_offline = array();
 	$jobsArray = array();
 	foreach( $remote_servers as $remote_server )
@@ -71,6 +72,12 @@ function reloadJobs($server_homes, $remote_servers)
 								break;
 						}
 						if(!isset($server_homes[$home_id."_".$ip."_".$port])) continue;
+						
+						if(!$getAllJobs && !hasAccessToCronjobHomeId($home_id)){
+							continue;
+						}
+						
+						
 						$jobsArray[$rhost_id][$jobId] = array( 'job' => $job, 
 															   'minute' => $minute, 
 															   'hour' => $hour, 
@@ -84,6 +91,9 @@ function reloadJobs($server_homes, $remote_servers)
 					}
 					else if(getURLParam("homeid=", $command) !== false){
 						$homeId = getURLParam("homeid=", $command);
+						if(!$getAllJobs && !hasAccessToCronjobHomeId($homeId)){
+							continue;
+						}
 						
 						$action = getURLParam("action=", $command);
 						if($action == "autoUpdateSteamHome"){
@@ -95,6 +105,8 @@ function reloadJobs($server_homes, $remote_servers)
 						}else if($action == "restartServer"){
 							$action = "restart";
 						}
+						
+						
 						
 						$jobsArray[$rhost_id][$jobId] = array( 'job' => $job, 
 															   'minute' => $minute, 
@@ -108,6 +120,10 @@ function reloadJobs($server_homes, $remote_servers)
 					}
 					else
 					{	
+						if(!$getAllJobs && !$db->isAdmin($_SESSION['user_id'])){
+							continue;
+						}			
+						
 						$jobsArray[$rhost_id][$jobId] = array( 'job' => $job, 
 															   'minute' => $minute, 
 															   'hour' => $hour, 
@@ -263,6 +279,12 @@ function checkCronInput($min, $hour, $day, $month, $dayOfWeek) {
     }
     
     return (empty($returns) ? true : false);
+}
+
+function hasAccessToCronjobHomeId($home_id){
+	global $db;
+	$hasAccess = ($db->isAdmin($_SESSION['user_id'])) ? true : $db->getUserGameHome($_SESSION['user_id'], $home_id);
+	return $hasAccess;
 }
 
 ?>

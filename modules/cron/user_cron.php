@@ -62,7 +62,7 @@ function exec_ogp_module()
 											"ftp_ip" => $home['ftp_ip']);
 	}
 	
-	list($jobsArray, $remote_servers_offline) = reloadJobs($server_homes, $remote_servers);
+	list($jobsArray, $remote_servers_offline) = reloadJobs($server_homes, $remote_servers, false);
 	
 	if( isset($_POST['addJob']) or isset($_POST['editJob']) )
 	{
@@ -138,7 +138,7 @@ function exec_ogp_module()
 				$remote->scheduler_edit_task($_POST['job_id'], $job);
 			elseif( isset($_POST['addJob']) ) 
 				$remote->scheduler_add_task($job);
-			list($jobsArray, $remote_servers_offline) = reloadJobs($server_homes, $remote_servers);
+			list($jobsArray, $remote_servers_offline) = reloadJobs($server_homes, $remote_servers, false);
 		}
 	}
 	elseif( isset($_POST['removeJob']) and isset($remote_servers[$_POST['r_server_id']]) and isset($jobsArray[$_POST['r_server_id']][$_POST['job_id']]) )
@@ -148,7 +148,7 @@ function exec_ogp_module()
 										$remote_servers[$_POST['r_server_id']]['encryption_key'],
 										$remote_servers[$_POST['r_server_id']]['timeout'] );
 		$remote->scheduler_del_task($_POST['job_id']);
-		list($jobsArray, $remote_servers_offline) = reloadJobs($server_homes, $remote_servers);
+		list($jobsArray, $remote_servers_offline) = reloadJobs($server_homes, $remote_servers, false);
 	}	
 
 	echo "<h2>" . get_lang("schedule_new_job") . "</h2>";
