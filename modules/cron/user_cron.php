@@ -294,7 +294,7 @@ function exec_ogp_module()
 	else
 		echo "<h3>". get_lang("there_are_no_scheduled_jobs") ."</h3>";
 ?>
-<table class='center hundred' ><tr><td><a href='javascript:history.go(-1)' > <?php echo get_lang("back") ?></a><?php if(!$boolShowedAdminLink && $isAdmin){ echo '&nbsp; &nbsp; | &nbsp; &nbsp; ' . '<a href="home.php?m=cron&p=cron">' . get_lang('cron_admin_link_display_text') . '</a>'; }?></td></tr></table>
+<table class='center hundred' ><tr><td><a href='javascript:history.go(-1)' > << <?php echo get_lang("back") ?></a><?php if(!$boolShowedAdminLink && $isAdmin){ echo '&nbsp; &nbsp; | &nbsp; &nbsp; ' . '<a href="home.php?m=cron&p=cron">' . get_lang('cron_admin_link_display_text') . '</a>'; }?></td></tr></table>
 <script type="text/javascript">
 $(document).ready(function() 
 	{
