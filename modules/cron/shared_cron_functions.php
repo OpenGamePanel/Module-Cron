@@ -73,7 +73,7 @@ function reloadJobs($server_homes, $remote_servers, $getAllJobs = true)
 						}
 						if(!isset($server_homes[$home_id."_".$ip."_".$port])) continue;
 						
-						if(!$getAllJobs && !hasAccessToCronjobHomeId($homeId)){
+						if(!$getAllJobs && !hasAccessToCronjobHomeId($home_id)){
 							continue;
 						}
 						
@@ -283,7 +283,7 @@ function checkCronInput($min, $hour, $day, $month, $dayOfWeek) {
 
 function hasAccessToCronjobHomeId($home_id){
 	global $db;
-	$hasAccess = ($db->isAdmin($_SESSION['user_id'])) ? true : $db->getUserGameHome($_SESSION['user_id'], $job['home_id']);
+	$hasAccess = ($db->isAdmin($_SESSION['user_id'])) ? true : $db->getUserGameHome($_SESSION['user_id'], $home_id);
 	return $hasAccess;
 }
 
