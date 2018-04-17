@@ -41,8 +41,8 @@ define('OGP_LANG_scheduled_jobs', "Ütemezett feladatok");
 define('OGP_LANG_there_are_no_scheduled_jobs', "Nincsenek ütemezett feladatok");
 define('OGP_LANG_cron_events', "Cron események");
 define('OGP_LANG_refresh_interval', "Frissítési intervallum");
-define('OGP_LANG_cron_no_servers_tied_to_account', "Nincsenek játékszerverek közvetlenül hozzárendelve a fiókodhoz.");
+define('OGP_LANG_cron_no_servers_tied_to_account', "Nincsenek szerverek közvetlenül a fiókodhoz hozzárendelve.");
 define('OGP_LANG_cron_admin_link_display_text', "Cron adminisztráció (minden szerver)");
-define('OGP_LANG_cron_admin_no_ogp_servers_to_display', "Jelenleg nincsenek játékszerverek beállítva az OGP-ben.");
-define('OGP_LANG_bad_inputs', "Scheduled time contains invalid characters.");
+define('OGP_LANG_cron_admin_no_ogp_servers_to_display', ".Jelenleg nincs olyan szerver, amely be van állítva az OGP-ben!");
+define('OGP_LANG_bad_inputs', "Az ütemezett idő érvénytelen karaktereket tartalmaz.");
 ?>
