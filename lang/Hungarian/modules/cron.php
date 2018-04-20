@@ -43,6 +43,6 @@ define('OGP_LANG_cron_events', "Cron események");
 define('OGP_LANG_refresh_interval', "Frissítési intervallum");
 define('OGP_LANG_cron_no_servers_tied_to_account', "Nincsenek szerverek közvetlenül a fiókodhoz hozzárendelve.");
 define('OGP_LANG_cron_admin_link_display_text', "Cron adminisztráció (minden szerver)");
-define('OGP_LANG_cron_admin_no_ogp_servers_to_display', "Jelenleg nincs olyan szerver, amely be van állítva az OGP-ben.");
+define('OGP_LANG_cron_admin_no_ogp_servers_to_display', "Az OGP-ben jelenleg nincsenek beállítva szerverek.");
 define('OGP_LANG_bad_inputs', "Az ütemezett idő érvénytelen karaktereket tartalmaz.");
 ?>
