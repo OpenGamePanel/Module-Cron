@@ -43,6 +43,6 @@ define('OGP_LANG_cron_events', "Logs des Événements Planifiés");
 define('OGP_LANG_refresh_interval', "Intervalle d'actualisation");
 define('OGP_LANG_cron_no_servers_tied_to_account', "Il n'y a pas de serveur assigné sur votre compte.");
 define('OGP_LANG_cron_admin_link_display_text', "Administration Cron (Tous les Serveurs)");
-define('OGP_LANG_cron_admin_no_ogp_servers_to_display', "Il n'y a pas de serveur de jeu configuré dans OGP.");
+define('OGP_LANG_cron_admin_no_ogp_servers_to_display', "Il n'y a pas de serveur configuré dans OGP.");
 define('OGP_LANG_bad_inputs', "Le temps programmé contient des caractères invalides.");
 ?>

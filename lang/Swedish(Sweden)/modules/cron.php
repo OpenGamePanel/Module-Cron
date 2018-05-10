@@ -41,8 +41,8 @@ define('OGP_LANG_scheduled_jobs', "Schemalagda jobb");
 define('OGP_LANG_there_are_no_scheduled_jobs', "Det finns inga schemalagda jobb");
 define('OGP_LANG_cron_events', "Cron händelser");
 define('OGP_LANG_refresh_interval', "Uppdaterinsintervall");
-define('OGP_LANG_cron_no_servers_tied_to_account', "Det finns inga spelservrar direkt tilldelade till ditt konto.");
+define('OGP_LANG_cron_no_servers_tied_to_account', "There are no servers directly assigned to your account.");
 define('OGP_LANG_cron_admin_link_display_text', "Cron administration (Alla Servrar)");
-define('OGP_LANG_cron_admin_no_ogp_servers_to_display', "Det finns just nu inga spelservrar konfigurerade i OGP.");
+define('OGP_LANG_cron_admin_no_ogp_servers_to_display', "There aren't any servers currently configured in OGP.");
 define('OGP_LANG_bad_inputs', "Scheduled time contains invalid characters.");
 ?>

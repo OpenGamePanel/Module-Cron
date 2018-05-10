@@ -41,8 +41,8 @@ define('OGP_LANG_scheduled_jobs', "plánované úlohy");
 define('OGP_LANG_there_are_no_scheduled_jobs', "Neexistují žádné naplánované úlohy");
 define('OGP_LANG_cron_events', "cron Ulohy");
 define('OGP_LANG_refresh_interval', "Interval obnovení");
-define('OGP_LANG_cron_no_servers_tied_to_account', "Na váš účet nejsou přímo přiřazeny žádné herní servery.");
+define('OGP_LANG_cron_no_servers_tied_to_account', "There are no servers directly assigned to your account.");
 define('OGP_LANG_cron_admin_link_display_text', "Cron Administrace (všechny servery)");
-define('OGP_LANG_cron_admin_no_ogp_servers_to_display', "V OGP nejsou aktuálně nakonfigurovány žádné herní servery.");
+define('OGP_LANG_cron_admin_no_ogp_servers_to_display', "There aren't any servers currently configured in OGP.");
 define('OGP_LANG_bad_inputs', "Plánovaný čas obsahuje neplatné znaky.");
 ?>
