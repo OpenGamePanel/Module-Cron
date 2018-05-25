@@ -273,7 +273,7 @@ function checkCronInput($min, $hour, $day, $month, $dayOfWeek) {
     $args = func_get_args();
     
     foreach ($args as $k => $arg) {
-        if (empty($arg) || strpbrk($arg, $blacklist) || preg_match('/\\s/', $arg)) {
+        if (strlen($arg) == 0 || strpbrk($arg, $blacklist) || preg_match('/\\s/', $arg)) {
             $returns[$k] = false;
         }
     }
