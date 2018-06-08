@@ -41,8 +41,8 @@ define('OGP_LANG_scheduled_jobs', "Zaplanowane zadania");
 define('OGP_LANG_there_are_no_scheduled_jobs', "Brak zaplanowanych zadań");
 define('OGP_LANG_cron_events', "Wydarzenia Cron");
 define('OGP_LANG_refresh_interval', "Powtórne Odświeżenie");
-define('OGP_LANG_cron_no_servers_tied_to_account', "There are no servers directly assigned to your account.");
-define('OGP_LANG_cron_admin_link_display_text', "Cron Administration (All Servers)");
-define('OGP_LANG_cron_admin_no_ogp_servers_to_display', "There aren't any servers currently configured in OGP.");
-define('OGP_LANG_bad_inputs', "Scheduled time contains invalid characters.");
+define('OGP_LANG_cron_no_servers_tied_to_account', "Nie posiadasz żadnych serwerów przypisanych do Ciebie.");
+define('OGP_LANG_cron_admin_link_display_text', "Zadania Cron (wszystkie serwery)");
+define('OGP_LANG_cron_admin_no_ogp_servers_to_display', "Nie ma jeszcze żadnych skonfigurowanych serwerów w OGP.");
+define('OGP_LANG_bad_inputs', "Zaplanowane zadanie posiada niedozwolone znaki.");
 ?>
