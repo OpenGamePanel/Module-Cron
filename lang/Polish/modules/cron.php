@@ -36,7 +36,7 @@ define('OGP_LANG_command', "Komenda");
 define('OGP_LANG_add', "Dodaj");
 define('OGP_LANG_remove', "Usuń");
 define('OGP_LANG_now', "Teraz");
-define('OGP_LANG_schedule_new_job', "Zaplanować nowe zadanie");
+define('OGP_LANG_schedule_new_job', "Zaplanuj nowe zadanie");
 define('OGP_LANG_scheduled_jobs', "Zaplanowane zadania");
 define('OGP_LANG_there_are_no_scheduled_jobs', "Brak zaplanowanych zadań");
 define('OGP_LANG_cron_events', "Wydarzenia Cron");
