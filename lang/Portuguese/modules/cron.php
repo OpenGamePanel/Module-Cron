@@ -41,8 +41,8 @@ define('OGP_LANG_scheduled_jobs', "Tarefas programadas");
 define('OGP_LANG_there_are_no_scheduled_jobs', "Não existem tarefas programadas");
 define('OGP_LANG_cron_events', "Tarefas Cron \"agendada de trabalho com base no tempo\"");
 define('OGP_LANG_refresh_interval', "Intervalo de actualização");
-define('OGP_LANG_cron_no_servers_tied_to_account', "There are no servers directly assigned to your account.");
+define('OGP_LANG_cron_no_servers_tied_to_account', "Não há servidores atribuídos directamente à sua conta.");
 define('OGP_LANG_cron_admin_link_display_text', "Administração de tarefas Cron (todos os servers)");
-define('OGP_LANG_cron_admin_no_ogp_servers_to_display', "There aren't any servers currently configured in OGP.");
+define('OGP_LANG_cron_admin_no_ogp_servers_to_display', "Não há servidores actualmente configurados no seu Painel.");
 define('OGP_LANG_bad_inputs', "O tempo agendado contém caracteres inválidos.");
 ?>
