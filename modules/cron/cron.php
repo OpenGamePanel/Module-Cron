@@ -1,4 +1,3 @@
-<script type="text/javascript" src="js/modules/cron.js"></script>
 <?php
 /*
  *
@@ -22,10 +21,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  *
  */
-error_reporting(E_ALL);
 require_once('includes/lib_remote.php');
-require_once('modules/gamemanager/home_handling_functions.php');
-require_once('modules/config_games/server_config_parser.php');
 require_once('modules/cron/shared_cron_functions.php');
 
 function exec_ogp_module() 
@@ -56,57 +52,46 @@ function exec_ogp_module()
 	
 	if( isset($_POST['addJob']) or isset($_POST['editJob']) )
 	{
-		if ( isset( $_POST['homeid_ip_port'] ) and isset($server_homes[$_POST['homeid_ip_port']]) )
+		if(!checkCronInput($_POST['minute'], $_POST['hour'], $_POST['dayOfTheMonth'], $_POST['month'], $_POST['dayOfTheWeek']))
 		{
+			print_failure(get_lang('OGP_LANG_bad_inputs'));
+			$view->refresh('?m=cron&p=cron',2);
+			return;
+		}
+		
+		if(isset($_POST['homeid_ip_port']) and isset($server_homes[$_POST['homeid_ip_port']]))
+		{
+			$panelURL = getOGPSiteURL();
+			if($panelURL === false)
+			{
+				print_failure('Failed to retrieve panel URL.');
+				$view->refresh('?m=cron&p=cron',2);
+				return;
+			}
+			
 			$game_home = $server_homes[$_POST['homeid_ip_port']];
-			$server_xml = read_server_config(SERVER_CONFIG_LOCATION."/".$game_home['home_cfg_file']);
-			$remote = new OGPRemoteLibrary( $game_home['agent_ip'], $game_home['agent_port'],
-											$game_home['encryption_key'], $game_home['timeout'] );
-			$home_id = $game_home['home_id'];
 			$ip = $game_home['ip'];
 			$port = $game_home['port'];
-			$control_protocol = $server_xml->control_protocol;
-			$control_password = $game_home['control_password'];
-			$control_type = $server_xml->control_protocol_type;
-			$home_path = $game_home['home_path'];
-			$server_exe = $server_xml->server_exec_name;
-			$run_dir = $server_xml->exe_location;
-			$game_home['mods'][$game_home['mod_id']] = Array ("mod_cfg_id" => $game_home['mod_cfg_id'],
-															  "max_players" => $game_home['max_players'],
-															  "extra_params" => $game_home['extra_params'],
-															  "cpu_affinity" => $game_home['cpu_affinity'],
-															  "nice" => $game_home['nice'],
-															  "precmd" => $game_home['precmd'],
-															  "postcmd" => $game_home['postcmd'],
-															  "home_cfg_id" => $game_home['home_cfg_id'],
-															  "mod_key" => $game_home['mod_key'],
-															  "mod_name" => $game_home['mod_name'],
-															  "def_precmd" => $game_home['def_precmd'],
-															  "def_postcmd" => $game_home['def_postcmd']);
-			$startup_cmd = get_start_cmd($remote,$server_xml,$game_home,$game_home['mod_id'],$game_home['ip'],$game_home['port'], $db);
-			$cpu = $game_home['cpu_affinity'];
-			$nice = $game_home['nice'];
-			
-			$panelURL = getOGPSiteURL();
-			if($panelURL === false){
-				print_failure('Failed to retrieve panel URL.');
-				return 0;
-			}
-			
+			$mod_key = $game_home['mod_key'];
+			$token = $db->getApiToken($_SESSION['user_id']);
+				
 			switch ($_POST['action']) {
 				case "stop":
-					$command = "wget -qO- \"" . $panelURL . "/ogp_api.php?action=stopServer&homeid=" . $home_id . "&controlpass=" . $control_password . "\" --no-check-certificate > /dev/null 2>&1";
+					$command = "wget -qO- \"${panelURL}/ogp_api.php?gamemanager/stop&token=${token}&ip=${ip}&port=${port}&mod_key=${mod_key}\" --no-check-certificate > /dev/null 2>&1";
 					break;
 				case "start":
-					$command = "wget -qO- \"" . $panelURL . "/ogp_api.php?action=startServer&homeid=" . $home_id . "&controlpass=" . $control_password . "\" --no-check-certificate > /dev/null 2>&1";
+					$command = "wget -qO- \"${panelURL}/ogp_api.php?gamemanager/start&token=${token}&ip=${ip}&port=${port}&mod_key=${mod_key}\" --no-check-certificate > /dev/null 2>&1";
 					break;
 				case "restart":
-					$command = "wget -qO- \"" . $panelURL . "/ogp_api.php?action=restartServer&homeid=" . $home_id . "&controlpass=" . $control_password . "\" --no-check-certificate > /dev/null 2>&1";
+					$command = "wget -qO- \"${panelURL}/ogp_api.php?gamemanager/restart&token=${token}&ip=${ip}&port=${port}&mod_key=${mod_key}\" --no-check-certificate > /dev/null 2>&1";
 					break;
 				case "steam_auto_update":
-					$command = "wget -qO- \"" . $panelURL . "/ogp_api.php?action=autoUpdateSteamHome&homeid=" . $home_id . "&controlpass=" . $control_password . "\" --no-check-certificate > /dev/null 2>&1";
+					$command = "wget -qO- \"${panelURL}/ogp_api.php?gamemanager/update&token=${token}&ip=${ip}&port=${port}&mod_key=${mod_key}&type=steam\" --no-check-certificate > /dev/null 2>&1";
 					break;
 			}
+			
+			$remote = new OGPRemoteLibrary( $game_home['agent_ip'], $game_home['agent_port'],
+											$game_home['encryption_key'], $game_home['timeout'] );
 		}
 		else
 		{
@@ -116,13 +101,6 @@ function exec_ogp_module()
 											$remote_servers[$r_server_id]['encryption_key'],
 											$remote_servers[$r_server_id]['timeout']);
 			$command = strip_real_escape_string($_POST['command']);
-		}
-
-		if (!checkCronInput($_POST['minute'], $_POST['hour'], $_POST['dayOfTheMonth'], $_POST['month'], $_POST['dayOfTheWeek'])) {
-			print_failure(get_lang('OGP_LANG_bad_inputs'));
-			$view->refresh('?m=cron&p=cron');
-
-			return;
 		}
 		
 		$job = $_POST['minute']." ".
@@ -216,10 +194,10 @@ function exec_ogp_module()
 			<input style="width: 30px;" type="text" name="dayOfTheWeek" value="*" />
 		</td>
 		<td>
-			<?php echo get_action_selector();?>
+			<?php echo get_action_selector(false, $server_homes, $homeid_ip_port);?>
 		</td>
 		<td>
-			<?php echo get_server_selector($server_homes, $homeid_ip_port, FALSE, true);?>
+			<?php echo get_server_selector($server_homes, $homeid_ip_port, true, true);?>
 		</td>
 		<td>
 			<input style="" type="submit" name="addJob" value="<?php echo get_lang("add"); ?>" />
@@ -336,13 +314,11 @@ function exec_ogp_module()
 				if(isset($job['action'])){	
 					if(array_key_exists('home_id', $job) && array_key_exists('ip', $job) && array_key_exists('port', $job) && hasValue($job['home_id']) && hasValue($job['ip']) && hasValue($job['port'])){
 						$idStr = $job['home_id']."_".$job['ip']."_".$job['port'];				
-					}else if(hasValue($job['home_id'])){
-						$idStr = $job['home_id'];
 					}else{
 						$idStr = false;
 					}
 								
-					$task = get_action_selector($job['action'])."</td><td>".
+					$task = get_action_selector($job['action'], $server_homes, $idStr)."</td><td>".
 							get_server_selector($server_homes, $idStr, FALSE, TRUE);
 				}
 				else
@@ -385,11 +361,11 @@ function exec_ogp_module()
 <?php
 	}
 	else
-	{
 		echo "<h3>". get_lang("there_are_no_scheduled_jobs") ."</h3>";
-	}
+
+	echo '<table class="center hundred" ><tr><td><a href="home.php?m=cron&p=user_cron">'.
+		 get_lang('back').'</a></td></tr></table>';
 ?>
-<table class='center hundred' ><tr><td><a href='javascript:history.go(-1)' > << <?php echo get_lang("back") ?></a></td></tr></table>
 <script type="text/javascript">
 $(document).ready(function() 
 	{

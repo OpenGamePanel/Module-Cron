@@ -42,71 +42,29 @@ function reloadJobs($server_homes, $remote_servers, $getAllJobs = true)
 			{
 				foreach($jobs as $jobId => $job)
 				{
-					$parts = explode(" ", $job);
-					$minute = $parts[0];
-					$hour = $parts[1];
-					$dayOfTheMonth = $parts[2];
-					$month = $parts[3];
-					$dayOfTheWeek = $parts[4];
-					unset($parts[0],$parts[1],$parts[2],$parts[3],$parts[4]);
-					$command = implode(" ", $parts);
-					$retval = preg_match_all("/^%ACTION=(start|restart|stop)\|%\|(.*)$/", $command, $job_info );
-					if($retval and !empty($job_info[1][0]))
+					list($minute,$hour,$dayOfTheMonth,$month,$dayOfTheWeek,$command) = explode(" ", $job, 6);
+					if(preg_match('/'.preg_quote('wget -qO- "','/').'([^"]+)'.preg_quote('" --no-check-certificate > /dev/null 2>&1','/').'/', $command))
 					{
-						//print_r($job_info);
-						$action = $job_info[1][0];
-						$server_args = explode("|%|", $job_info[2][0]);
-						switch ($action) {
-							case 'start':
-								list($home_id, $home_path, $server_exe, $run_dir,
-									 $startup_cmd, $port, $ip, $cpu, $nice) = $server_args;
-								break;
-							case 'restart':
-								list($home_id, $ip, $port, $control_protocol, 
-									 $control_password, $control_type, $home_path, 
-									 $server_exe, $run_dir, $startup_cmd, $cpu, $nice) = $server_args;
-								break;
-							case 'stop':
-								list($home_id, $ip, $port, $control_protocol, 
-									 $control_password, $control_type, $home_path) = $server_args;
-								break;
-						}
-						if(!isset($server_homes[$home_id."_".$ip."_".$port])) continue;
+						list($wget,$wget_args,$url,$wget_nocert,$gt,$devnull,$err2out) =  explode(" ", $command, 7);
+						//echo "$wget,$wget_args,$url,$wget_nocert,$gt,$devnull,$err2out<br>";
+						parse_str(parse_url(trim($url,'"'), PHP_URL_QUERY), $url_query);
 						
-						if(!$getAllJobs && !hasAccessToCronjobHomeId($home_id)){
+						if(!isset($url_query['ip']) or !isset($url_query['port']))
 							continue;
-						}
-						
-						
-						$jobsArray[$rhost_id][$jobId] = array( 'job' => $job, 
-															   'minute' => $minute, 
-															   'hour' => $hour, 
-															   'dayOfTheMonth' => $dayOfTheMonth, 
-															   'month' => $month, 
-															   'dayOfTheWeek' => $dayOfTheWeek,
-															   'action' => $action,
-															   'home_id' => $home_id,
-															   'ip' => $ip,
-															   'port' => $port);
-					}
-					else if(getURLParam("homeid=", $command) !== false){
-						$homeId = getURLParam("homeid=", $command);
-						if(!$getAllJobs && !hasAccessToCronjobHomeId($homeId)){
+						$home_info = $db->getGameHomeByIP($url_query['ip'], $url_query['port']);
+						if(!$getAllJobs && !hasAccess($home_info))
 							continue;
-						}
 						
-						$action = getURLParam("action=", $command);
-						if($action == "autoUpdateSteamHome"){
+						$action = key($url_query);
+						if($action == "gamemanager/update"){
 							$action = "steam_auto_update";
-						}else if($action == "stopServer"){
+						}else if($action == "gamemanager/stop"){
 							$action = "stop";
-						}else if($action == "startServer"){
+						}else if($action == "gamemanager/start"){
 							$action = "start";
-						}else if($action == "restartServer"){
+						}else if($action == "gamemanager/restart"){
 							$action = "restart";
 						}
-						
-						
 						
 						$jobsArray[$rhost_id][$jobId] = array( 'job' => $job, 
 															   'minute' => $minute, 
@@ -116,7 +74,10 @@ function reloadJobs($server_homes, $remote_servers, $getAllJobs = true)
 															   'dayOfTheWeek' => $dayOfTheWeek,
 															   'command' => $command,
 															   'action' => $action,
-															   'home_id' => $homeId);
+															   'home_id' => $home_info['home_id'],
+															   'ip' => $home_info['ip'],
+															   'port' => $home_info['port'],
+															   'mod_key' => $url_query['mod_key']);
 					}
 					else
 					{	
@@ -213,8 +174,14 @@ function updateCronJobPasswords($db, $remote, $changedHomeId){
 	}
 }
 
-function get_action_selector($action = false) {
-	$server_actions = array('restart','stop','start','steam_auto_update');
+function get_action_selector($action = false, $server_homes = false, $homeid_ip_port = false) {
+	$server_actions = array('restart','stop','start');
+	if($server_homes and $homeid_ip_port)
+	{
+		$server_xml = read_server_config(SERVER_CONFIG_LOCATION."/".$server_homes[$homeid_ip_port]['home_cfg_file']);
+		if( $server_xml->installer == "steamcmd" )
+			$server_actions[] = 'steam_auto_update';
+	}
 	$select_action = '<select name="action" style="width: 100%;">';
 	foreach($server_actions as $server_action)
 	{
@@ -229,16 +196,8 @@ function get_server_selector($server_homes, $homeid_ip_port = FALSE, $onchange =
 	$select_game = "<select style='text-overflow: ellipsis; width: 100%;' name='homeid_ip_port' $onchange_this_form_submit>\n";
 	if($server_homes != FALSE)
 	{
-		
 		foreach ( $server_homes as $server_home )
 		{
-			// Find out if it's a steamcmd server
-			$additionalMarkup = "";
-			$server_xml = read_server_config(SERVER_CONFIG_LOCATION."/".$server_home['home_cfg_file']);
-			if( $server_xml->installer == "steamcmd" ){
-				$additionalMarkup = 'steam="1"';
-			}			
-			
 			$selected = ($homeid_ip_port and ($homeid_ip_port == $server_home['home_id']."_".$server_home['ip']."_".$server_home['port'] || trim($homeid_ip_port) == trim($server_home['home_id']))) ? 'selected="selected"' : '';
 			$select_game .= "<option value='". $server_home['home_id'] . "_" . $server_home['ip'] .
 							"_" . $server_home['port'] . "' $selected " . $additionalMarkup . ">" . $server_home['home_name'] . 
@@ -281,10 +240,9 @@ function checkCronInput($min, $hour, $day, $month, $dayOfWeek) {
     return (empty($returns) ? true : false);
 }
 
-function hasAccessToCronjobHomeId($home_id){
+function hasAccess($home_info){
 	global $db;
-	$hasAccess = ($db->isAdmin($_SESSION['user_id'])) ? true : $db->getUserGameHome($_SESSION['user_id'], $home_id);
-	return $hasAccess;
+	return ($home_info and $db->isAdmin($_SESSION['user_id'])) ? true : ($home_info and $db->getUserGameHome($_SESSION['user_id'], $home_info['home_id']));
 }
 
 ?>

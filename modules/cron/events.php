@@ -1,4 +1,3 @@
-<script type="text/javascript" src="js/jquery/jquery-1.11.0.min.js"></script>
 <?php
 /*
  *
@@ -23,8 +22,6 @@
  *
  */
 
-error_reporting(E_ALL);
-
 function exec_ogp_module() 
 {	
 	// Using the refreshed class
@@ -40,7 +37,7 @@ function exec_ogp_module()
 			print_failure(get_lang("agent_offline"));
 			return;
 		}
-		$remote->remote_readfile('scheduler.log', $events);
+		$remote->remote_readfile('scheduler.log',$events);
 		if ($events != "")
 			echo "<pre class='log' >$events</pre>";
 		else
