@@ -100,75 +100,18 @@ function reloadJobs($server_homes, $remote_servers, $getAllJobs = true)
 	return array($jobsArray, $remote_servers_offline);
 }
 
-function updateCronJobPasswords($db, $remote, $changedHomeId){
-	$homes = $db->getIpPorts();
-
-	foreach( $homes as $home )
+function updateCronJobTokens($old_token, $token){
+	global $db;
+	$remote_servers = $db->getRemoteServers();
+	foreach($remote_servers as $remote_server)
 	{
-		$id = $home['home_id']."_".$home['ip']."_".$home['port'];
-		$server_homes[$id] = $home;
-		$server_id = $home['remote_server_id'];
-		$remote_servers[$server_id] = array("remote_server_id" => $home['remote_server_id'],
-											"remote_server_name" => $home['remote_server_name'],
-											"ogp_user" => $home['ogp_user'],
-											"agent_ip" => $home['agent_ip'],
-											"agent_port" => $home['agent_port'],
-											"ftp_port" => $home['ftp_port'],
-											"encryption_key" => $home['encryption_key'],
-											"timeout" => $home['timeout'],
-											"use_nat" => $home['use_nat'],
-											"ftp_ip" => $home['ftp_ip']);
-	}
-
-	list($jobsArray, $remote_servers_offline) = reloadJobs($server_homes, $remote_servers);
-
-	$homes = customShift($homes, "home_id", $changedHomeId);
-	$homeIdStr = "homeid=";
-	$actionStr = "action=";
-	$cPassStr = "controlpass=";
-
-	if(count($homes) > 0){
-		$home = $homes[0];
-		if($home["home_id"] == $changedHomeId){ 
-			$control_password = $home['control_password'];
-			
-			foreach( $jobsArray as $remote_server_id => $jobs )
+		$remote = new OGPRemoteLibrary($remote_server['agent_ip'], $remote_server['agent_port'], $remote_server['encryption_key'], $remote_server['timeout']);
+		$jobs = $remote->scheduler_list_tasks();
+		foreach($jobs as $job_id => $job)
+		{
+			if(strstr($job, $old_token))
 			{
-				if($home['remote_server_id'] == $remote_server_id){
-					foreach($jobs as $jobId => $job)
-					{
-						$command = $job['command'];
-						$homeId = getURLParam($homeIdStr, $command);
-						$action = getURLParam($actionStr, $command);
-						if($homeId !== false && $action !== false){
-							if($homeId == $changedHomeId){
-								$curPass = getURLParam($cPassStr, $command);
-								if(stripos($curPass, '" --no-check-certificate') !== false){
-									$curPass = substr($curPass, 0, stripos($curPass, '" --no-check-certificate'));
-								}else if(strrpos($curPass, '"') !== false){
-									$curPass = substr($curPass, 0, strrpos($curPass, '"'));
-								}								
-								if($curPass != $control_password){
-									$command = str_replace($cPassStr . $curPass, $cPassStr . $control_password, $command);
-									$minute = $job['minute'];
-									$hour = $job['hour'];
-									$dayOfTheMonth = $job['dayOfTheMonth'];
-									$month = $job['month'];
-									$dayOfTheWeek = $job['dayOfTheWeek'];
-									
-									$job = $minute." ".
-										$hour ." ".
-										$dayOfTheMonth." ".
-										$month." ".
-										$dayOfTheWeek." ".
-										$command;
-										
-									$remote->scheduler_edit_task($jobId, $job);						
-								}
-							}
-						}
-					}
-				}
+				$remote->scheduler_edit_task($job_id, str_replace($old_token, $token, $job));
 			}
 		}
 	}
