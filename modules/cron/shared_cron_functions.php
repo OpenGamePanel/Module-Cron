@@ -188,4 +188,59 @@ function hasAccess($home_info){
 	return ($home_info and $db->isAdmin($_SESSION['user_id'])) ? true : ($home_info and $db->getUserGameHome($_SESSION['user_id'], $home_info['home_id']));
 }
 
+function updateCronJobsToNewApi()
+{
+	$panelURL = getOGPSiteURL();
+	if($panelURL === false)
+		return false;
+	
+	global $db;
+	$remote_servers = $db->getRemoteServers();
+	$regex = '/'.preg_quote('action=','/').'([a-zA-Z]+)'.preg_quote('&homeid=','/').'([0-9]+)'.preg_quote('&controlpass=','/').'([^"]+)/';
+	
+	foreach($remote_servers as $remote_server)
+	{
+		$remote = new OGPRemoteLibrary($remote_server['agent_ip'], $remote_server['agent_port'], $remote_server['encryption_key'], $remote_server['timeout']);
+		$jobs = $remote->scheduler_list_tasks();
+		$token = $db->getApiToken($_SESSION['user_id']);
+		$mod_key = '';
+		foreach($jobs as $job_id => $job)
+		{
+			if(preg_match($regex, $job, $matches))
+			{
+				list($full_match, $action, $home_id, $control_password) = $matches;
+				$home_ip_ports = $db->getHomeIpPorts($home_id);
+				if(isset($home_ip_ports[0]))
+				{
+					list($ip_id,$ip,$port,$force_mod_id) = $home_ip_ports[0];
+					switch ($action) {
+						case "stopServer":
+							$command = "wget -qO- \"${panelURL}/ogp_api.php?gamemanager/stop&token=${token}&ip=${ip}&port=${port}&mod_key=${mod_key}\" --no-check-certificate > /dev/null 2>&1";
+							break;
+						case "startServer":
+							$command = "wget -qO- \"${panelURL}/ogp_api.php?gamemanager/start&token=${token}&ip=${ip}&port=${port}&mod_key=${mod_key}\" --no-check-certificate > /dev/null 2>&1";
+							break;
+						case "restartServer":
+							$command = "wget -qO- \"${panelURL}/ogp_api.php?gamemanager/restart&token=${token}&ip=${ip}&port=${port}&mod_key=${mod_key}\" --no-check-certificate > /dev/null 2>&1";
+							break;
+						case "autoUpdateSteamHome":
+							$command = "wget -qO- \"${panelURL}/ogp_api.php?gamemanager/update&token=${token}&ip=${ip}&port=${port}&mod_key=${mod_key}&type=steam\" --no-check-certificate > /dev/null 2>&1";
+							break;
+					}
+					list($minute,$hour,$dayOfTheMonth,$month,$dayOfTheWeek,$old_command) = explode(" ", $job, 6);
+					$new_job = $minute." ".
+							   $hour." ".
+							   $dayOfTheMonth." ".
+							   $month." ".
+							   $dayOfTheWeek." ".
+							   $command;
+					
+					$remote->scheduler_edit_task($job_id, $new_job);
+				}
+			}
+		}
+	}
+	
+}
+
 ?>

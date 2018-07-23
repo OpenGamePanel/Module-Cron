@@ -48,6 +48,13 @@ function exec_ogp_module()
 		$remote_servers[$id] = $r_server;
 	}
 	
+	$check_file = "modules/cron/update.check";
+	if(!file_exists($check_file))
+	{
+		updateCronJobsToNewApi();
+		file_put_contents($check_file, "updated");
+	}
+	
 	list($jobsArray, $remote_servers_offline) = reloadJobs($server_homes, $remote_servers);
 	
 	if( isset($_POST['addJob']) or isset($_POST['editJob']) )
