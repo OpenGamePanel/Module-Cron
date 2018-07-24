@@ -216,7 +216,11 @@ function updateCronJobsToNewApi()
 					$home_ip_ports = $db->getHomeIpPorts($home_id);
 					if(isset($home_ip_ports[0]))
 					{
-						@list($ip_id,$ip,$port,$force_mod_id) = $home_ip_ports[0];
+						$ip_id = $home_ip_ports[0]["ip_id"];
+						$port = $home_ip_ports[0]["port"];
+						$ip = $home_ip_ports[0]["ip"];
+						$force_mod_id = $home_ip_ports[0]["force_mod_id"];
+						
 						switch ($action) {
 							case "stopServer":
 								$command = "wget -qO- \"${panelURL}/ogp_api.php?gamemanager/stop&token=${token}&ip=${ip}&port=${port}&mod_key=${mod_key}\" --no-check-certificate > /dev/null 2>&1";
