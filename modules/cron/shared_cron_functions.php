@@ -26,10 +26,9 @@ function reloadJobs($server_homes, $remote_servers, $getAllJobs = true)
 	global $db;
 	$remote_servers_offline = array();
 	$jobsArray = array();
-	foreach( $remote_servers as $remote_server )
+	foreach( $remote_servers as $rhost_id => $remote_server )
 	{
 		$remote = new OGPRemoteLibrary($remote_server['agent_ip'], $remote_server['agent_port'], $remote_server['encryption_key'], $remote_server['timeout']);
-		$rhost_id = $remote_server['remote_server_id'];
 		if($remote->status_chk() != 1)
 		{
 			$remote_servers_offline[$rhost_id] = $remote_server;
@@ -46,7 +45,7 @@ function reloadJobs($server_homes, $remote_servers, $getAllJobs = true)
 					if(preg_match('/'.preg_quote('wget -qO- "','/').'([^"]+)'.preg_quote('" --no-check-certificate > /dev/null 2>&1','/').'/', $command))
 					{
 						list($wget,$wget_args,$url,$wget_nocert,$gt,$devnull,$err2out) =  explode(" ", $command, 7);
-						//echo "$wget,$wget_args,$url,$wget_nocert,$gt,$devnull,$err2out<br>";
+						
 						parse_str(parse_url(trim($url,'"'), PHP_URL_QUERY), $url_query);
 						
 						if(!isset($url_query['ip']) or !isset($url_query['port']))
@@ -143,7 +142,7 @@ function get_server_selector($server_homes, $homeid_ip_port = FALSE, $onchange =
 		{
 			$selected = ($homeid_ip_port and ($homeid_ip_port == $server_home['home_id']."_".$server_home['ip']."_".$server_home['port'] || trim($homeid_ip_port) == trim($server_home['home_id']))) ? 'selected="selected"' : '';
 			$select_game .= "<option value='". $server_home['home_id'] . "_" . $server_home['ip'] .
-							"_" . $server_home['port'] . "' $selected " . $additionalMarkup . ">" . $server_home['home_name'] . 
+							"_" . $server_home['port'] . "' $selected >" . $server_home['home_name'] . 
 							" - " . checkDisplayPublicIP($server_home['display_public_ip'],$server_home['ip'] != $server_home['agent_ip'] ? $server_home['ip'] : $server_home['agent_ip']) . ":" .$server_home['port'];
 			if($includeRemoteName){
 				$select_game .= " ( " . $server_home['remote_server_name'] . " )";
