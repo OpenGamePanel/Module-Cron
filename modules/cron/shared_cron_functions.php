@@ -201,13 +201,14 @@ function updateCronJobsToNewApi()
 		global $db;
 		$remote_servers = $db->getRemoteServers();
 		$regex = '/'.preg_quote('action=','/').'([a-zA-Z]+)'.preg_quote('&homeid=','/').'([0-9]+)'.preg_quote('&controlpass=','/').'([^"]+)/';
-		
+		$token = $db->getApiToken($_SESSION['user_id']);
+		$mod_key = '';
 		foreach($remote_servers as $remote_server)
 		{
 			$remote = new OGPRemoteLibrary($remote_server['agent_ip'], $remote_server['agent_port'], $remote_server['encryption_key'], $remote_server['timeout']);
 			$jobs = $remote->scheduler_list_tasks();
-			$token = $db->getApiToken($_SESSION['user_id']);
-			$mod_key = '';
+			if(!is_array($jobs))
+				continue;
 			foreach($jobs as $job_id => $job)
 			{
 				if(preg_match($regex, $job, $matches))
@@ -216,10 +217,8 @@ function updateCronJobsToNewApi()
 					$home_ip_ports = $db->getHomeIpPorts($home_id);
 					if(isset($home_ip_ports[0]))
 					{
-						$ip_id = $home_ip_ports[0]["ip_id"];
 						$port = $home_ip_ports[0]["port"];
 						$ip = $home_ip_ports[0]["ip"];
-						$force_mod_id = $home_ip_ports[0]["force_mod_id"];
 						
 						switch ($action) {
 							case "stopServer":
