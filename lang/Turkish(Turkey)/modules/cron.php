@@ -39,10 +39,10 @@ define('OGP_LANG_now', "Şimdi");
 define('OGP_LANG_schedule_new_job', "Yeni bir iş planla");
 define('OGP_LANG_scheduled_jobs', "Planlanmış işler");
 define('OGP_LANG_there_are_no_scheduled_jobs', "Planlanmış iş yok");
-define('OGP_LANG_cron_events', "Cron Events");
+define('OGP_LANG_cron_events', "İş Olayları");
 define('OGP_LANG_refresh_interval', "Yenileme Sıklığı");
-define('OGP_LANG_cron_no_servers_tied_to_account', "There are no servers directly assigned to your account.");
-define('OGP_LANG_cron_admin_link_display_text', "Cron Administration (All Servers)");
+define('OGP_LANG_cron_no_servers_tied_to_account', "Doğrudan hesabınıza atanan sunucu yok.");
+define('OGP_LANG_cron_admin_link_display_text', "Cron Yönetimi (Tüm Sunucular)");
 define('OGP_LANG_cron_admin_no_ogp_servers_to_display', "OGP'de yapılandırılmış hiç sunucu yok.");
-define('OGP_LANG_bad_inputs', "Scheduled time contains invalid characters.");
+define('OGP_LANG_bad_inputs', "Zamanlanmış olay geçersiz karakterler içeriyor.");
 ?>
