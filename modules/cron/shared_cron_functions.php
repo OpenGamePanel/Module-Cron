@@ -118,6 +118,7 @@ function updateCronJobTokens($old_token, $token){
 
 function deleteJobsByHomeServerID($home_id){
 	global $db;
+	$jobIdsToDel = array();
 	$homeInfo = $db->getGameHome($home_id);
 	if($homeInfo){
 		$remote_servers = $db->getRemoteServers();
@@ -129,12 +130,17 @@ function deleteJobsByHomeServerID($home_id){
 			{
 				if(strstr($job, "homeid=" . $home_id))
 				{
-					$remote->scheduler_del_task($job_id);
+					$jobIdsToDel[] = $job_id;
 				}else if(strstr($job, "ip=" . $homeInfo["ip"]) && strstr($job, "port=" . $homeInfo["port"])){
-					$remote->scheduler_del_task($job_id);
+					$jobIdsToDel[] = $job_id;	
 				}
 			}
 		}
+	}
+	
+	if(is_array($jobIdsToDel) && count($jobIdsToDel) > 0){
+		// Only make one call
+		$remote->scheduler_del_task(implode(",", $jobIdsToDel));
 	}
 }
 
