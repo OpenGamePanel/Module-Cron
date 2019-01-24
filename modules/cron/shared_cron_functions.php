@@ -116,6 +116,34 @@ function updateCronJobTokens($old_token, $token){
 	}
 }
 
+function deleteJobsByHomeServerID($home_id){
+	global $db;
+	$jobIdsToDel = array();
+	$homeInfo = $db->getGameHome($home_id);
+	if($homeInfo){
+		$remote_servers = $db->getRemoteServers();
+		foreach($remote_servers as $remote_server)
+		{
+			$remote = new OGPRemoteLibrary($remote_server['agent_ip'], $remote_server['agent_port'], $remote_server['encryption_key'], $remote_server['timeout']);
+			$jobs = $remote->scheduler_list_tasks();
+			foreach($jobs as $job_id => $job)
+			{
+				if(strstr($job, "homeid=" . $home_id))
+				{
+					$jobIdsToDel[] = $job_id;
+				}else if(strstr($job, "ip=" . $homeInfo["ip"]) && strstr($job, "port=" . $homeInfo["port"])){
+					$jobIdsToDel[] = $job_id;	
+				}
+			}
+		}
+	}
+	
+	if(is_array($jobIdsToDel) && count($jobIdsToDel) > 0){
+		// Only make one call
+		$remote->scheduler_del_task(implode(",", $jobIdsToDel));
+	}
+}
+
 function get_action_selector($action = false, $server_homes = false, $homeid_ip_port = false) {
 	$server_actions = array('restart','stop','start');
 	if($server_homes and $homeid_ip_port)
