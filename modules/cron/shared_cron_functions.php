@@ -119,7 +119,7 @@ function updateCronJobTokens($old_token, $token){
 function deleteJobsByHomeServerID($home_id){
 	global $db;
 	$jobIdsToDel = array();
-	$homeInfo = $db->getGameHome($home_id);
+	$homeInfo = $db->getGameHome($home_id, true);
 	if($homeInfo){
 		$remote_servers = $db->getRemoteServers();
 		foreach($remote_servers as $remote_server)
