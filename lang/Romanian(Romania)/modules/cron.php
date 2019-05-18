@@ -23,26 +23,26 @@
  */
 
 define('OGP_LANG_minute', "Minute");
-define('OGP_LANG_hour', "Hour");
-define('OGP_LANG_day', "Day");
-define('OGP_LANG_month', "Month");
-define('OGP_LANG_day_of_the_week', "D/Week");
-define('OGP_LANG_action', "Action");
-define('OGP_LANG_steam_auto_update', "Steam Auto Update");
-define('OGP_LANG_stop', "Stop");
-define('OGP_LANG_start', "Start");
-define('OGP_LANG_restart', "Restart");
-define('OGP_LANG_command', "Command");
-define('OGP_LANG_add', "Add");
-define('OGP_LANG_remove', "Remove");
-define('OGP_LANG_now', "Now");
-define('OGP_LANG_schedule_new_job', "Schedule a new job");
-define('OGP_LANG_scheduled_jobs', "Scheduled jobs");
-define('OGP_LANG_there_are_no_scheduled_jobs', "There are no scheduled jobs");
-define('OGP_LANG_cron_events', "Cron Events");
-define('OGP_LANG_refresh_interval', "Refresh Interval");
-define('OGP_LANG_cron_no_servers_tied_to_account', "There are no servers directly assigned to your account.");
-define('OGP_LANG_cron_admin_link_display_text', "Cron Administration (All Servers)");
-define('OGP_LANG_cron_admin_no_ogp_servers_to_display', "There aren't any servers currently configured in OGP.");
-define('OGP_LANG_bad_inputs', "Scheduled time contains invalid characters.");
+define('OGP_LANG_hour', "Ora");
+define('OGP_LANG_day', "Ziua");
+define('OGP_LANG_month', "Luna");
+define('OGP_LANG_day_of_the_week', "Săptămâna");
+define('OGP_LANG_action', "Actiune");
+define('OGP_LANG_steam_auto_update', "Actualizare automată Steam");
+define('OGP_LANG_stop', "Oprire");
+define('OGP_LANG_start', "Pornire");
+define('OGP_LANG_restart', "Repornire");
+define('OGP_LANG_command', "Comandă");
+define('OGP_LANG_add', "Adaugă");
+define('OGP_LANG_remove', "Elimină");
+define('OGP_LANG_now', "Acum");
+define('OGP_LANG_schedule_new_job', "Programați un nou job");
+define('OGP_LANG_scheduled_jobs', "Job-uri programate");
+define('OGP_LANG_there_are_no_scheduled_jobs', "Nu sunt job-uri programate");
+define('OGP_LANG_cron_events', "Evenimente Cron");
+define('OGP_LANG_refresh_interval', "Interval reîmprospătare");
+define('OGP_LANG_cron_no_servers_tied_to_account', "Nu există niciun server atribuit direct contului dvs.");
+define('OGP_LANG_cron_admin_link_display_text', "Administrare Cron (Toate serverele)");
+define('OGP_LANG_cron_admin_no_ogp_servers_to_display', "Acum nu există niciun server configurat în OGP.");
+define('OGP_LANG_bad_inputs', "Programarea orei/datei conține caractere nevalide.");
 ?>
