@@ -22,10 +22,10 @@
  *
  */
 
-define('OGP_LANG_minute', "Minute");
-define('OGP_LANG_hour', "Hour");
-define('OGP_LANG_day', "Day");
-define('OGP_LANG_month', "Month");
+define('OGP_LANG_minute', "Minuutti");
+define('OGP_LANG_hour', "Tunti");
+define('OGP_LANG_day', "Päivä");
+define('OGP_LANG_month', "Kuukausi");
 define('OGP_LANG_day_of_the_week', "D/Week");
 define('OGP_LANG_action', "Action");
 define('OGP_LANG_steam_auto_update', "Steam Auto Update");
