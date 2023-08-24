@@ -41,8 +41,8 @@ define('OGP_LANG_scheduled_jobs', "Запланированные задания
 define('OGP_LANG_there_are_no_scheduled_jobs', "Запланированных заданий нет");
 define('OGP_LANG_cron_events', "События задания");
 define('OGP_LANG_refresh_interval', "Интервал обновления консоли");
-define('OGP_LANG_cron_no_servers_tied_to_account', "Нет серверов назначенных специально для вашего аккаунта.");
-define('OGP_LANG_cron_admin_link_display_text', "Администрирование Планировщика (все сервера)");
-define('OGP_LANG_cron_admin_no_ogp_servers_to_display', "Сейчас нет никаких сконфигурированных серверов в OGP.");
+define('OGP_LANG_cron_no_servers_tied_to_account', "Нет серверов, назначенных специально для вашей учётной записи.");
+define('OGP_LANG_cron_admin_link_display_text', "Администрирование планировщика (все сервера)");
+define('OGP_LANG_cron_admin_no_ogp_servers_to_display', "Сейчас нет никаких настроенных серверов в OGP.");
 define('OGP_LANG_bad_inputs', "Поле запланированного времени содержит недопустимые символы.");
 ?>
