@@ -250,16 +250,16 @@ function updateCronJobsToNewApi()
 						
 						switch ($action) {
 							case "stopServer":
-								$command = "wget -qO- \"${panelURL}/ogp_api.php?gamemanager/stop&token=${token}&ip=${ip}&port=${port}&mod_key=${mod_key}\" --no-check-certificate > /dev/null 2>&1";
+								$command = "wget -qO- \"{$panelURL}/ogp_api.php?gamemanager/stop&token={$token}&ip={$ip}&port={$port}&mod_key={$mod_key}\" --no-check-certificate > /dev/null 2>&1";
 								break;
 							case "startServer":
-								$command = "wget -qO- \"${panelURL}/ogp_api.php?gamemanager/start&token=${token}&ip=${ip}&port=${port}&mod_key=${mod_key}\" --no-check-certificate > /dev/null 2>&1";
+								$command = "wget -qO- \"{$panelURL}/ogp_api.php?gamemanager/start&token={$token}&ip={$ip}&port={$port}&mod_key={$mod_key}\" --no-check-certificate > /dev/null 2>&1";
 								break;
 							case "restartServer":
-								$command = "wget -qO- \"${panelURL}/ogp_api.php?gamemanager/restart&token=${token}&ip=${ip}&port=${port}&mod_key=${mod_key}\" --no-check-certificate > /dev/null 2>&1";
+								$command = "wget -qO- \"{$panelURL}/ogp_api.php?gamemanager/restart&token={$token}&ip={$ip}&port={$port}&mod_key={$mod_key}\" --no-check-certificate > /dev/null 2>&1";
 								break;
 							case "autoUpdateSteamHome":
-								$command = "wget -qO- \"${panelURL}/ogp_api.php?gamemanager/update&token=${token}&ip=${ip}&port=${port}&mod_key=${mod_key}&type=steam\" --no-check-certificate > /dev/null 2>&1";
+								$command = "wget -qO- \"{$panelURL}/ogp_api.php?gamemanager/update&token={$token}&ip={$ip}&port={$port}&mod_key={$mod_key}&type=steam\" --no-check-certificate > /dev/null 2>&1";
 								break;
 						}
 						list($minute,$hour,$dayOfTheMonth,$month,$dayOfTheWeek,$old_command) = explode(" ", $job, 6);
